@@ -13,6 +13,18 @@ export interface PersonalInfo {
   fullName: string;
   tagline: string;
   contact: ContactInfo;
+  photo?: string; // path in /public, es. "/images/francesco.jpg". Se assente, viene mostrato un avatar con le iniziali.
+}
+
+export interface AboutContent {
+  intro: string; // chi sono
+  whatIDo: string; // cosa faccio
+  lookingFor: string; // cosa cerco (es. tirocinio Erasmus+)
+}
+
+export interface Stat {
+  label: string;
+  value: string;
 }
 
 export interface SkillGroup {
@@ -63,8 +75,11 @@ export interface VolunteerEntry {
 
 export interface CVContent {
   personal: PersonalInfo;
-  summary: string;
+  about: AboutContent;
+  summary: string; // professional summary sintetico, usato nella pagina /cv
+  stats: Stat[]; // numeri concreti (utenti, performance, repo gestiti, ...)
   skills: SkillGroup[];
+  projects: Project[];
   experience: ExperienceEntry[];
   education: EducationEntry[];
   languages: LanguageEntry[];

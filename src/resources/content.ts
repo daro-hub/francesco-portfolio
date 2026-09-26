@@ -1,26 +1,51 @@
 import type { CVContent } from "@/types/content";
 
-// TODO: questo file va completato con i dati reali prima della fase di design.
+// TODO: questo file va completato con i dati reali.
 // I campi marcati "TODO" non sono ancora stati forniti/confermati.
 
 export const content: CVContent = {
   personal: {
     fullName: "Francesco Da Rin Zanco",
-    tagline: "Full-Stack Developer", // TODO: confermare tagline definitiva (es. includere "Erasmus+ candidate"?)
+    tagline: "Full-Stack Developer", // TODO: confermare tagline definitiva
     contact: {
-      email: "TODO", // email pubblica da mostrare sul CV (potrebbe differire da quella dell'account)
+      email: "TODO",
       linkedin: "TODO",
       github: "TODO",
-      location: "TODO", // città attuale
+      location: "TODO",
     },
+    // photo: "/images/francesco.jpg", // TODO: aggiungere una foto in public/images
   },
-  summary: "TODO: professional summary (3-5 righe).",
+  about: {
+    intro: "TODO: chi sono (2-3 frasi).",
+    whatIDo: "TODO: cosa faccio oggi (ruolo, stack, su cosa lavoro).",
+    lookingFor:
+      "TODO: cosa cerco — es. tirocinio Erasmus+ 2026-2027 in ambito full-stack / IoT / AI.",
+  },
+  summary: "TODO: professional summary (3-5 righe) per la pagina /cv.",
+  stats: [
+    { label: "TODO — es. Active users", value: "TODO" },
+    { label: "TODO — es. Performance improvement", value: "TODO" },
+    { label: "TODO — es. Repositories managed", value: "TODO" },
+  ],
   skills: [
     { area: "Frontend", skills: [] },
     { area: "Mobile", skills: [] },
     { area: "Backend", skills: [] },
     { area: "AI/LLM", skills: [] },
     // TODO: aggiungere/rinominare aree se necessario (es. DevOps, Data/ML, Cloud)
+  ],
+  projects: [
+    // TODO: 2-3 progetti in evidenza, es:
+    // {
+    //   slug: "project-slug",
+    //   title: "Project Name",
+    //   description: "Breve descrizione del progetto e del tuo ruolo.",
+    //   link: "https://...",
+    //   repoLink: "https://github.com/...",
+    //   tags: ["React", "Node.js"],
+    //   featured: true,
+    //   order: 1,
+    // },
   ],
   experience: [
     {

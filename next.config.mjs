@@ -1,4 +1,5 @@
-import createMDX from "@next/mdx";
+const isGithubActions = process.env.GITHUB_ACTIONS === "true";
+const repoName = "francesco-portfolio";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -7,13 +8,15 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  pageExtensions: ["ts", "tsx", "md", "mdx"],
-  // Se il sito verrà pubblicato su https://<user>.github.io/francesco-portfolio
-  // (senza dominio personalizzato) andranno impostati basePath/assetPrefix:
-  // basePath: "/francesco-portfolio",
-  // assetPrefix: "/francesco-portfolio/",
+  // Necessario per GitHub Pages quando il sito è servito da
+  // https://<user>.github.io/francesco-portfolio (project pages, no dominio custom).
+  // Se in futuro si passa a un dominio personalizzato, rimuovere questo blocco.
+  ...(isGithubActions
+    ? {
+        basePath: `/${repoName}`,
+        assetPrefix: `/${repoName}/`,
+      }
+    : {}),
 };
 
-const withMDX = createMDX({});
-
-export default withMDX(nextConfig);
+export default nextConfig;

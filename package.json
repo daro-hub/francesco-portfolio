@@ -9,9 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/mdx": "^15.5.9",
-    "@types/mdx": "^2.0.13",
-    "gray-matter": "^4.0.3",
     "next": "^15.5.9",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
