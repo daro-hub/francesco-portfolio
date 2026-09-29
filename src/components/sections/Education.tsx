@@ -3,7 +3,7 @@ import { dictionary } from "@/i18n";
 
 export function Education() {
   return (
-    <section id="education" className="snap-section">
+    <section id="education" className="doc-section">
       <div className="section-inner">
         <h2 className="section-title">{dictionary.education.title}</h2>
 

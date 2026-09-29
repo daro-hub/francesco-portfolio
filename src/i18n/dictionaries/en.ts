@@ -6,11 +6,16 @@ export const en = {
     education: "Education",
   },
   hero: {
-    greeting: "Hi, I'm",
+    greeting: "Ready to dive in",
     ctaResume: "Download CV (PDF)",
-    ctaContact: "Get in touch",
     linkedin: "LinkedIn",
     github: "GitHub",
+    email: "Email",
+    phone: "Phone",
+    photoComingSoon: "Photo coming soon",
+    scrollCue: "Scroll to explore",
+    copied: "Copied!",
+    holdToCopyHint: "Tap to open · hold to copy",
   },
   about: {
     title: "About",
@@ -36,11 +41,6 @@ export const en = {
   cv: {
     download: "Download PDF",
     back: "Back to site",
-  },
-  language: {
-    label: "Language",
-    unsupported:
-      "Only English is currently supported — more languages coming soon.",
   },
   theme: {
     toggleToDark: "Switch to dark mode",

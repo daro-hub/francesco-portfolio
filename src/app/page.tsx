@@ -4,6 +4,7 @@ import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
 import { Education } from "@/components/sections/Education";
 import { SectionDots } from "@/components/layout/SectionDots";
+import { ScrollContainer } from "@/components/layout/ScrollContainer";
 import { dictionary } from "@/i18n";
 
 const sections = [
@@ -17,13 +18,13 @@ const sections = [
 export default function HomePage() {
   return (
     <>
-      <div id="scroll-container">
+      <ScrollContainer>
         <Hero />
         <About />
         <Projects />
         <Experience />
         <Education />
-      </div>
+      </ScrollContainer>
       <SectionDots sections={sections} />
     </>
   );

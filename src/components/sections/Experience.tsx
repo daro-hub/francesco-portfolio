@@ -7,7 +7,7 @@ function formatRange(start: string, end: string) {
 
 export function Experience() {
   return (
-    <section id="experience" className="snap-section">
+    <section id="experience" className="doc-section">
       <div className="section-inner">
         <h2 className="section-title">{dictionary.experience.title}</h2>
 
@@ -29,7 +29,7 @@ export function Experience() {
                     ))}
                   </ul>
                 ) : (
-                  <p className="placeholder">TODO</p>
+                  <p className="placeholder">TBD</p>
                 )}
               </div>
             </li>

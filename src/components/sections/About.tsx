@@ -3,12 +3,12 @@ import { dictionary } from "@/i18n";
 
 export function About() {
   return (
-    <section id="about" className="snap-section">
+    <section id="about" className="doc-section">
       <div className="section-inner">
         <h2 className="section-title">{dictionary.about.title}</h2>
 
         <div className="about-grid">
-          <div className="about-text">
+          <div className="about-text glass-card about-panel">
             <h3>{dictionary.about.whoAmI}</h3>
             <p>{content.about.intro}</p>
 
@@ -19,7 +19,7 @@ export function About() {
             <p>{content.about.lookingFor}</p>
           </div>
 
-          <div className="about-skills">
+          <div className="about-skills glass-card about-panel">
             <h3>{dictionary.about.skillsTitle}</h3>
             <div className="skill-groups">
               {content.skills.map((group) => (
@@ -29,22 +29,13 @@ export function About() {
                     {group.skills.length > 0 ? (
                       group.skills.map((skill) => <li key={skill}>{skill}</li>)
                     ) : (
-                      <li className="placeholder">TODO</li>
+                      <li className="placeholder">TBD</li>
                     )}
                   </ul>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-
-        <div className="stats-row">
-          {content.stats.map((stat) => (
-            <div key={stat.label} className="stat-card">
-              <span className="stat-value">{stat.value}</span>
-              <span className="stat-label">{stat.label}</span>
-            </div>
-          ))}
         </div>
       </div>
     </section>

@@ -1,42 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
+import { useActiveSection } from "@/hooks/useActiveSection";
 
 interface SectionDotsProps {
   sections: { id: string; label: string }[];
 }
 
 export function SectionDots({ sections }: SectionDotsProps) {
-  const [active, setActive] = useState(sections[0]?.id);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.5 },
-    );
-
-    const elements = sections
-      .map((s) => document.getElementById(s.id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, [sections]);
+  // .map crea un nuovo array ad ogni render; senza memo l'effetto dentro
+  // useActiveSection (dipendenza [ids]) ripartirebbe ad ogni render — cioè
+  // ad ogni cambio di sezione attiva, dato che quel cambio causa proprio un
+  // re-render di questo componente — disconnettendo e ricreando
+  // l'IntersectionObserver in loop e perdendo aggiornamenti (il sintomo:
+  // nav/segmenti che non si aggiornano più durante lo scroll).
+  const ids = useMemo(() => sections.map((s) => s.id), [sections]);
+  const active = useActiveSection(ids);
 
   return (
-    <nav className="section-dots" aria-label="Sections">
+    <nav className="section-index" aria-label="Sections">
       {sections.map((section) => (
         <a
           key={section.id}
           href={`#${section.id}`}
-          className={`section-dot${active === section.id ? " active" : ""}`}
+          className={`section-index-item${active === section.id ? " active" : ""}`}
           aria-label={section.label}
           aria-current={active === section.id ? "true" : undefined}
         />

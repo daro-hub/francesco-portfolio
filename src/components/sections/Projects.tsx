@@ -5,7 +5,7 @@ export function Projects() {
   const projects = [...content.projects].sort((a, b) => a.order - b.order);
 
   return (
-    <section id="projects" className="snap-section">
+    <section id="projects" className="doc-section">
       <div className="section-inner">
         <h2 className="section-title">{dictionary.projects.title}</h2>
 
@@ -14,7 +14,7 @@ export function Projects() {
         ) : (
           <div className="projects-grid">
             {projects.map((project) => (
-              <article key={project.slug} className="project-card">
+              <article key={project.slug} className="project-card glass-card">
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
                 <ul className="project-tags">
