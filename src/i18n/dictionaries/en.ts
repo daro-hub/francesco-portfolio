@@ -16,6 +16,10 @@ export const en = {
     scrollCue: "Scroll to explore",
     copied: "Copied!",
     holdToCopyHint: "Tap to open · hold to copy",
+    githubStatsTitle: "On GitHub",
+    githubPublicRepos: "Public repos",
+    githubStars: "Stars",
+    githubFollowers: "Followers",
   },
   about: {
     title: "About",
@@ -23,10 +27,6 @@ export const en = {
     whatIDo: "What I do",
     lookingFor: "What I'm looking for",
     skillsTitle: "Technical Skills",
-    githubStatsTitle: "On GitHub",
-    githubPublicRepos: "Public repos",
-    githubStars: "Stars",
-    githubFollowers: "Followers",
   },
   projects: {
     title: "Projects",

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
 import { ContactActionPill } from "@/components/ContactActionPill";
+import { getGithubStats } from "@/lib/github";
 
 function MailIcon() {
   return (
@@ -46,7 +47,8 @@ function DownloadIcon() {
   );
 }
 
-export function Hero() {
+export async function Hero() {
+  const githubStats = await getGithubStats();
   const { fullName, tagline, contact, photo } = content.personal;
   const [firstName, ...rest] = fullName.split(" ");
   const initials = fullName
@@ -160,6 +162,34 @@ export function Hero() {
             <DownloadIcon />
             {dictionary.hero.ctaResume}
           </Link>
+
+          {githubStats && (
+            <a
+              href={`https://github.com/${githubStats.username}`}
+              target="_blank"
+              rel="noreferrer"
+              className="github-stats"
+            >
+              <span className="github-stats-title">
+                <GithubIcon />
+                {dictionary.hero.githubStatsTitle}
+              </span>
+              <div className="github-stats-row">
+                <div className="github-stat">
+                  <span className="github-stat-value">{githubStats.publicRepos}</span>
+                  <span className="github-stat-label">{dictionary.hero.githubPublicRepos}</span>
+                </div>
+                <div className="github-stat">
+                  <span className="github-stat-value">{githubStats.totalStars}</span>
+                  <span className="github-stat-label">{dictionary.hero.githubStars}</span>
+                </div>
+                <div className="github-stat">
+                  <span className="github-stat-value">{githubStats.followers}</span>
+                  <span className="github-stat-label">{dictionary.hero.githubFollowers}</span>
+                </div>
+              </div>
+            </a>
+          )}
         </div>
 
         <div className="hero-portrait">
