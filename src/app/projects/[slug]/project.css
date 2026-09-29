@@ -1,0 +1,117 @@
+.project-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: calc(var(--header-height) + 3rem) 1.5rem 5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.project-page-inner {
+  width: 100%;
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+.project-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem 0.5rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease, gap 0.15s ease;
+}
+
+.project-back-link svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform 0.15s ease;
+}
+
+.project-back-link:hover {
+  color: var(--color-accent);
+  border-color: rgba(59, 107, 255, 0.28);
+}
+
+.project-back-link:hover svg {
+  transform: translateX(-3px);
+}
+
+.project-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16rem;
+  margin-bottom: 2.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1.5px dashed var(--color-border-strong);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.project-title {
+  font-size: clamp(1.7rem, 4vw, 2.25rem);
+  margin: 0 0 1.25rem;
+}
+
+.project-page-tags {
+  margin-bottom: 1.75rem;
+}
+
+.project-long-description {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin: 0 0 2rem;
+}
+
+.project-long-description p {
+  margin: 0 0 1rem;
+}
+
+.project-long-description p:last-child {
+  margin-bottom: 0;
+}
+
+.project-concept,
+.project-role {
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.project-concept p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.project-role-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.project-role p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.project-page-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}

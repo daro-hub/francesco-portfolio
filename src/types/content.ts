@@ -33,15 +33,24 @@ export interface SkillGroup {
   skills: string[];
 }
 
+export interface ProjectRepo {
+  label: string; // es. "Frontend", "Backend", "Repository" — alcuni progetti hanno più repo separati
+  url: string;
+}
+
 export interface Project {
-  slug: string;
+  slug: string; // usato nell'URL della pagina di dettaglio: /projects/<slug>/
   title: string;
-  description: string;
-  link?: string;
-  repoLink?: string;
+  description: string; // breve, per la card nella home
+  concept?: string; // il "perché"/l'idea di partenza, se distinta dal "come funziona"
+  longDescription: string; // dettagliata (come funziona), per la pagina del progetto
+  role?: string; // il tuo contributo specifico, se il progetto non è solo tuo
+  link?: string; // demo live, se esiste
+  repos: ProjectRepo[];
   tags: string[];
   featured: boolean;
   order: number;
+  previewImage?: string; // screenshot in /public, se disponibile
 }
 
 export interface ExperienceEntry {

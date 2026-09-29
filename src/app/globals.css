@@ -799,6 +799,66 @@ ol {
   padding: 2rem;
 }
 
+/* GitHub stats — numeri reali letti dall'API pubblica a build time, non
+   inventati (vedi src/lib/github.ts). L'intero blocco è un link al profilo. */
+.github-stats {
+  display: block;
+  margin-top: 2.5rem;
+  padding: 1.5rem 2rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.github-stats:hover {
+  border-color: rgba(59, 107, 255, 0.28);
+  transform: translateY(-2px);
+}
+
+.github-stats-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.github-stats-title svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.github-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.github-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.github-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.github-stat-label {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
 .about-text h3 {
   font-family: var(--font-body);
   font-size: 0.95rem;
@@ -868,12 +928,16 @@ ol {
 }
 
 .project-card {
+  display: block;
   padding: 1.75rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
+  border-color: rgba(59, 107, 255, 0.28);
 }
 
 .project-card h3 {
@@ -903,16 +967,32 @@ ol {
   color: var(--color-text-muted);
 }
 
-.project-links {
-  display: flex;
-  gap: 1.25rem;
+.project-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  border: 1px solid rgba(59, 107, 255, 0.28);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--color-accent);
+  transition: gap 0.15s ease, background-color 0.15s ease;
 }
 
-.project-links a {
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: var(--color-accent);
-  text-decoration: none;
+.project-card-cta svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform 0.15s ease;
+}
+
+.project-card:hover .project-card-cta {
+  background: rgba(59, 107, 255, 0.22);
+}
+
+.project-card:hover .project-card-cta svg {
+  transform: translateX(3px);
 }
 
 @media (min-width: 768px) {

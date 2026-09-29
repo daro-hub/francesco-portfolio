@@ -62,6 +62,24 @@ export function GitHubIcon() {
   );
 }
 
+export function ArrowLeftIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M19 12H5" />
+      <path d="M10.5 6.5 5 12l5.5 5.5" />
+    </svg>
+  );
+}
+
+export function ArrowRightIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M5 12h14" />
+      <path d="M13.5 6.5 19 12l-5.5 5.5" />
+    </svg>
+  );
+}
+
 export function ImagePlaceholderIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">

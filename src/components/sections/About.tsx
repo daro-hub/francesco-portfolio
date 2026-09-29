@@ -1,7 +1,11 @@
 import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
+import { getGithubStats } from "@/lib/github";
+import { GitHubIcon } from "@/components/icons";
 
-export function About() {
+export async function About() {
+  const githubStats = await getGithubStats();
+
   return (
     <section id="about" className="doc-section">
       <div className="section-inner">
@@ -37,6 +41,34 @@ export function About() {
             </div>
           </div>
         </div>
+
+        {githubStats && (
+          <a
+            href={`https://github.com/${githubStats.username}`}
+            target="_blank"
+            rel="noreferrer"
+            className="github-stats"
+          >
+            <span className="github-stats-title">
+              <GitHubIcon />
+              {dictionary.about.githubStatsTitle}
+            </span>
+            <div className="github-stats-row">
+              <div className="github-stat">
+                <span className="github-stat-value">{githubStats.publicRepos}</span>
+                <span className="github-stat-label">{dictionary.about.githubPublicRepos}</span>
+              </div>
+              <div className="github-stat">
+                <span className="github-stat-value">{githubStats.totalStars}</span>
+                <span className="github-stat-label">{dictionary.about.githubStars}</span>
+              </div>
+              <div className="github-stat">
+                <span className="github-stat-value">{githubStats.followers}</span>
+                <span className="github-stat-label">{dictionary.about.githubFollowers}</span>
+              </div>
+            </div>
+          </a>
+        )}
       </div>
     </section>
   );
