@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
@@ -21,6 +22,17 @@ export function Projects() {
                 href={`/projects/${project.slug}/`}
                 className="project-card glass-card"
               >
+                {project.previewImage && (
+                  <div className="project-card-thumb">
+                    <Image
+                      src={project.previewImage}
+                      alt=""
+                      width={640}
+                      height={400}
+                      className="project-card-thumb-img"
+                    />
+                  </div>
+                )}
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
                 <ul className="project-tags">

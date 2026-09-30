@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -45,9 +46,22 @@ export default async function ProjectPage({
           {dictionary.projects.backToProjects}
         </Link>
 
-        <div className="project-preview">
-          <span>{dictionary.projects.previewComingSoon}</span>
-        </div>
+        {project.previewImage ? (
+          <div className="project-preview project-preview-image">
+            <Image
+              src={project.previewImage}
+              alt={`${project.title} preview`}
+              width={1280}
+              height={800}
+              className="project-preview-img"
+              priority
+            />
+          </div>
+        ) : (
+          <div className="project-preview">
+            <span>{dictionary.projects.previewComingSoon}</span>
+          </div>
+        )}
 
         <h1 className="project-title">{project.title}</h1>
 

@@ -55,6 +55,7 @@ export const content: CVContent = {
       tags: ["Next.js", "FastAPI", "Pinecone", "GPT-4", "RAG"],
       featured: true,
       order: 1,
+      previewImage: "/images/projects/longevity.jpg",
     },
     {
       slug: "orbis",
