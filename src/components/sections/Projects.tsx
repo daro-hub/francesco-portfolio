@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
@@ -22,14 +21,15 @@ export function Projects() {
                 href={`/projects/${project.slug}/`}
                 className="project-card glass-card"
               >
-                {project.previewImage && (
+                {project.link && (
                   <div className="project-card-thumb">
-                    <Image
-                      src={project.previewImage}
-                      alt=""
-                      width={640}
-                      height={400}
-                      className="project-card-thumb-img"
+                    <iframe
+                      src={project.link}
+                      title=""
+                      tabIndex={-1}
+                      aria-hidden="true"
+                      className="project-card-thumb-iframe"
+                      loading="lazy"
                     />
                   </div>
                 )}

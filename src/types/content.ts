@@ -50,7 +50,6 @@ export interface Project {
   tags: string[];
   featured: boolean;
   order: number;
-  previewImage?: string; // screenshot in /public, se disponibile
 }
 
 export interface ExperienceEntry {
