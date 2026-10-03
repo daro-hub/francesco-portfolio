@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
+import { AmuseApp } from "@/components/sections/AmuseApp";
 import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
 import { Education } from "@/components/sections/Education";
@@ -10,6 +11,7 @@ import { dictionary } from "@/i18n";
 const sections = [
   { id: "top", label: "Home" },
   { id: "about", label: dictionary.nav.about },
+  { id: "amuse-app", label: dictionary.nav.amuseApp },
   { id: "projects", label: dictionary.nav.projects },
   { id: "experience", label: dictionary.nav.experience },
   { id: "education", label: dictionary.nav.education },
@@ -21,6 +23,7 @@ export default function HomePage() {
       <ScrollContainer>
         <Hero />
         <About />
+        <AmuseApp />
         <Projects />
         <Experience />
         <Education />

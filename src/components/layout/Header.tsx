@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { dictionary } from "@/i18n";
@@ -10,6 +10,7 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 
 const navItems = [
   { href: "#about", id: "about", label: dictionary.nav.about },
+  { href: "#amuse-app", id: "amuse-app", label: dictionary.nav.amuseApp },
   { href: "#projects", id: "projects", label: dictionary.nav.projects },
   { href: "#experience", id: "experience", label: dictionary.nav.experience },
   { href: "#education", id: "education", label: dictionary.nav.education },
@@ -22,16 +23,55 @@ const initials = content.personal.fullName
   .map((part) => part[0])
   .join("");
 
+// Stesso breakpoint di .menu-toggle/.site-nav in globals.css: sopra questa
+// soglia il bottone hamburger è nascosto via CSS, quindi è l'unico punto in
+// cui un redimensionamento della finestra può lasciare il menu mobile aperto
+// senza più alcun controllo visibile per richiuderlo.
+const DESKTOP_QUERY = "(min-width: 768px)";
+
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
   const active = useActiveSection(isHome ? sectionIds : []);
+  const headerRef = useRef<HTMLElement>(null);
 
   const logo = initials;
 
+  // Richiude automaticamente il menu se la finestra viene ridimensionata (o
+  // ruotata) sopra il breakpoint desktop mentre è aperto.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const desktopQuery = window.matchMedia(DESKTOP_QUERY);
+    const closeIfDesktop = () => {
+      if (desktopQuery.matches) setMenuOpen(false);
+    };
+    desktopQuery.addEventListener("change", closeIfDesktop);
+    return () => desktopQuery.removeEventListener("change", closeIfDesktop);
+  }, [menuOpen]);
+
+  // Click fuori dal menu o tasto Escape: prima l'unico modo per richiuderlo
+  // era il bottone hamburger stesso o un click su un link di navigazione.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [menuOpen]);
+
   return (
-    <header className="site-header">
+    <header className="site-header" ref={headerRef}>
       {isHome ? (
         <a href="#top" className="site-logo">
           {logo}

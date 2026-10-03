@@ -40,7 +40,7 @@ export function About() {
         </div>
       </div>
 
-      <ScrollCue targetId="projects" />
+      <ScrollCue targetId="amuse-app" />
     </section>
   );
 }

@@ -33,6 +33,18 @@ export interface SkillGroup {
   skills: string[];
 }
 
+export interface AmuseAppProduct {
+  name: string; // es. "Console", "Visitor webapp"
+  tagline: string; // breve etichetta, es. "Backoffice", "Hardware"
+  description: string;
+  stack: string[];
+}
+
+export interface AmuseAppContent {
+  intro: string;
+  products: AmuseAppProduct[];
+}
+
 export interface ProjectRepo {
   label: string; // es. "Frontend", "Backend", "Repository" — alcuni progetti hanno più repo separati
   url: string;
@@ -85,6 +97,7 @@ export interface VolunteerEntry {
 export interface CVContent {
   personal: PersonalInfo;
   about: AboutContent;
+  amuseApp: AmuseAppContent;
   summary: string; // professional summary sintetico, usato nella pagina /cv
   stats: Stat[]; // numeri concreti (utenti, performance, repo gestiti, ...)
   skills: SkillGroup[];

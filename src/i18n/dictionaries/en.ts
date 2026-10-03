@@ -1,6 +1,7 @@
 export const en = {
   nav: {
     about: "About",
+    amuseApp: "Amuse App",
     projects: "Projects",
     experience: "Experience",
     education: "Education",
@@ -23,6 +24,10 @@ export const en = {
     whatIDo: "What I do",
     lookingFor: "What I'm looking for",
     skillsTitle: "Technical Skills",
+  },
+  amuseApp: {
+    title: "Amuse App",
+    badge: "amuseapp · production",
   },
   projects: {
     title: "Projects",

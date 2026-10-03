@@ -282,6 +282,15 @@ ol {
   .menu-toggle {
     display: none;
   }
+
+  /* Rete di sicurezza puramente CSS: anche se lo stato React menuOpen
+     resta "true" (es. aperto sotto i 768px, poi finestra ridimensionata
+     sopra senza che l'effetto di chiusura in Header.tsx sia ancora
+     scattato), la tendina non deve mai poter apparire qui, dove il
+     bottone che la controlla è già nascosto. */
+  .site-nav-mobile {
+    display: none;
+  }
 }
 
 /* -------------------------------------------------------------------- */
@@ -510,8 +519,15 @@ ol {
   margin: 0 0 1.1rem;
 }
 
+/* Il cognome rompe il font del nome: corsivo editoriale (Newsreader) contro
+   il grottesco geometrico bold (Space Grotesk) di "Francesco" — lo stesso
+   contrasto di font che prima viveva solo nella tagline, ora sul nome
+   stesso. */
 .hero-name .accent {
   color: var(--color-accent);
+  font-family: var(--font-voice), var(--font-body);
+  font-style: italic;
+  font-weight: 500;
 }
 
 /* Tag "Full-Stack Developer": badge con una fascia d'accento piena e
@@ -688,6 +704,14 @@ ol {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Un anello scuro (si fonde con lo sfondo) seguito da un anello
+     d'accento e da un alone soffuso: senza, una foto scura sfuma dentro
+     allo sfondo scuro e il cerchio diventa illeggibile ai suoi bordi. */
+  border: 3px solid var(--color-bg);
+  box-shadow:
+    0 0 0 3px var(--color-accent),
+    0 0 0 9px var(--color-accent-soft),
+    0 25px 60px -25px rgba(59, 107, 255, 0.45);
 }
 
 .hero-avatar img {
@@ -699,6 +723,7 @@ ol {
 .hero-avatar-placeholder {
   background: var(--color-surface);
   border: 1.5px dashed var(--color-border-strong);
+  box-shadow: none;
   backdrop-filter: blur(18px);
   flex-direction: column;
   gap: 0.5rem;
@@ -932,6 +957,61 @@ ol {
 
   .skill-groups {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* -------------------------------------------------------------------- */
+/* Amuse App                                                             */
+/* -------------------------------------------------------------------- */
+
+.amuse-intro {
+  color: var(--color-text-muted);
+  max-width: 46rem;
+  line-height: 1.7;
+  margin: -1rem 0 2rem;
+}
+
+.amuse-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+.amuse-card {
+  padding: 1.75rem;
+}
+
+.amuse-card h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.6rem;
+}
+
+.amuse-tagline {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.amuse-card p {
+  margin: 0 0 1.1rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.amuse-badge {
+  display: inline-flex;
+  margin-top: 0.9rem;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 0.3rem 0.8rem;
+}
+
+@media (min-width: 768px) {
+  .amuse-grid {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 }
 

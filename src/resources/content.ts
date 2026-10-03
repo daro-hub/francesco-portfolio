@@ -24,6 +24,38 @@ export const content: CVContent = {
     lookingFor:
       "I'm looking for an Erasmus+ 2026-2027 internship, and I'm genuinely open — any hands-on computer science work interests me, as long as I get to build real things instead of just studying them.",
   },
+  amuseApp: {
+    intro:
+      "Full-stack developer at amuseapp since 2025 — I build and maintain the systems behind museum ticketing and visitor experiences, end to end: console, visitor webapp, mobile app, and the kiosk hardware that talks to payment terminals.",
+    products: [
+      {
+        name: "Console",
+        tagline: "Backoffice",
+        description:
+          "Where curators manage audioguides, itineraries, and multilingual content — including AI-assisted tools for translation and text generation that I built.",
+        stack: ["Next.js", "Xano"],
+      },
+      {
+        name: "Visitor webapp",
+        tagline: "Visitor-facing",
+        description: "Led the redesign of the booking and itinerary experience visitors use on-site.",
+        stack: ["Next.js"],
+      },
+      {
+        name: "Mobile app",
+        tagline: "iOS & Android",
+        description: "Contributed features to the visitor companion app.",
+        stack: ["React Native", "Expo"],
+      },
+      {
+        name: "Totem kiosk",
+        tagline: "Hardware",
+        description:
+          "Integrated the Console with self-service museum kiosks — device-level flows and backend security, talking directly to payment terminals.",
+        stack: ["Kotlin", "Android"],
+      },
+    ],
+  },
   summary:
     "Full-stack developer building the platforms behind museum ticketing and visitor experiences at amuseapp — backoffice console, visitor webapp, mobile app, and the Android kiosk software that talks to payment hardware. Outside of work I design and ship AI-driven side projects solo, end to end: a RAG-based nutrition assistant, an algorithmic trading platform with a rigorously-tested backtesting engine, and an AI pipeline that turns source PDFs into finished PowerPoint decks. Currently completing a Bachelor's in Computer Science (IoT, Big Data & ML) at the University of Udine, and looking for an Erasmus+ 2026-2027 internship to keep building real things.",
   stats: [],
