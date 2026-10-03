@@ -18,14 +18,14 @@ export const content: CVContent = {
   },
   about: {
     intro:
-      "I'm a full-stack developer at amuseapp, where I build and maintain the platforms behind museum ticketing and visitor experiences — and I'm completing a Master's in Computer Science (IoT, Big Data & ML) at the University of Udine to push further into the hardware side of what I already help ship.",
+      "I'm a full-stack developer at amuseapp, where I build and maintain the platforms behind museum ticketing and visitor experiences — and I'm completing a Bachelor's in Computer Science (IoT, Big Data & ML) at the University of Udine to push further into the hardware side of what I already help ship.",
     whatIDo:
       "Day to day I work across the backoffice console, the visitor-facing webapp, our mobile app, and the Android kiosk software that runs our museum ticket totems — talking directly to payment terminals and hardware. I've also been taking on more ownership of the system's health: monitoring, automations, and keeping things stable in production.",
     lookingFor:
       "I'm looking for an Erasmus+ 2026-2027 internship, and I'm genuinely open — any hands-on computer science work interests me, as long as I get to build real things instead of just studying them.",
   },
   summary:
-    "Full-stack developer building the platforms behind museum ticketing and visitor experiences at amuseapp — backoffice console, visitor webapp, mobile app, and the Android kiosk software that talks to payment hardware. Outside of work I design and ship AI-driven side projects solo, end to end: a RAG-based nutrition assistant, an algorithmic trading platform with a rigorously-tested backtesting engine, and an AI pipeline that turns source PDFs into finished PowerPoint decks. Currently completing a Master's in Computer Science (IoT, Big Data & ML) at the University of Udine, and looking for an Erasmus+ 2026-2027 internship to keep building real things.",
+    "Full-stack developer building the platforms behind museum ticketing and visitor experiences at amuseapp — backoffice console, visitor webapp, mobile app, and the Android kiosk software that talks to payment hardware. Outside of work I design and ship AI-driven side projects solo, end to end: a RAG-based nutrition assistant, an algorithmic trading platform with a rigorously-tested backtesting engine, and an AI pipeline that turns source PDFs into finished PowerPoint decks. Currently completing a Bachelor's in Computer Science (IoT, Big Data & ML) at the University of Udine, and looking for an Erasmus+ 2026-2027 internship to keep building real things.",
   stats: [],
   skills: [
     { area: "Frontend", skills: ["Next.js", "React", "TypeScript", "Tailwind CSS"] },
@@ -129,7 +129,7 @@ export const content: CVContent = {
   education: [
     {
       institution: "Università degli Studi di Udine",
-      degree: "Master's Degree in Computer Science (IoT, Big Data & ML)",
+      degree: "Bachelor's Degree in Computer Science (IoT, Big Data & ML)",
       location: "Udine, IT",
       startDate: "2024-09",
       endDate: "present",

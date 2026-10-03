@@ -19,14 +19,19 @@
   margin-bottom: 1.5rem;
 }
 
-.cv-toolbar a {
-  color: var(--color-text);
-  text-decoration: none;
-  font-weight: 500;
+/* Era un link di solo testo ("Back to site"); ora un bottone pillola con
+   icona X, in linea con lo stile .btn del resto del sito invece di un
+   semplice testo sottolineato al passaggio del mouse. */
+.cv-close-btn {
+  padding: 0.6rem 1.1rem 0.6rem 0.9rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  gap: 0.45rem;
 }
 
-.cv-toolbar a:hover {
-  color: var(--color-accent);
+.cv-close-btn svg {
+  width: 0.9rem;
+  height: 0.9rem;
 }
 
 .cv-sheet {

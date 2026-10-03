@@ -46,7 +46,7 @@ export const en = {
   cv: {
     download: "Download PDF",
     downloading: "Preparing PDF…",
-    back: "Back to site",
+    back: "Close",
   },
   theme: {
     toggleToDark: "Switch to dark mode",

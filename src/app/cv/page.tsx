@@ -9,11 +9,22 @@ export const metadata: Metadata = {
   title: `${content.personal.fullName} — CV`,
 };
 
+function CloseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export default function CvPage() {
   return (
     <main className="cv-page">
       <div className="cv-toolbar no-print">
-        <Link href="/">{dictionary.cv.back}</Link>
+        <Link href="/" className="btn btn-secondary cv-close-btn">
+          <CloseIcon />
+          {dictionary.cv.back}
+        </Link>
         <CvDownloadButton />
       </div>
 

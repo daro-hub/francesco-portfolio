@@ -623,21 +623,28 @@ ol {
   height: 0.9rem;
 }
 
-/* Download CV: link secondario defilato, non un bottone pieno — è
-   un'azione facoltativa e non la CTA principale della hero (vedi Hero.tsx). */
+/* "See CV": azione secondaria, non la CTA principale della hero (vedi
+   Hero.tsx) — ma una pillola con lo stesso linguaggio visivo delle altre
+   pillole della pagina (contact-pill, project-card-cta) invece di un
+   semplice link di testo sottolineato al passaggio del mouse. */
 .cv-link-subtle {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  border: 1px solid rgba(59, 107, 255, 0.28);
   text-decoration: none;
-  color: var(--color-text-muted);
-  font-size: 0.82rem;
-  font-weight: 500;
-  transition: color 0.15s ease;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background-color 0.15s ease, transform 0.15s ease;
 }
 
 .cv-link-subtle:hover {
-  color: var(--color-text);
+  background: rgba(59, 107, 255, 0.22);
+  transform: translateY(-1px);
 }
 
 .cv-link-subtle svg {
