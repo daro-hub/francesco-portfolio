@@ -3,13 +3,15 @@
 import { useRef, useState, type MouseEvent, type ReactNode } from "react";
 
 interface ContactActionPillProps {
-  /** tel:/mailto: — l'azione di un tap/click normale. */
+  /** tel:/mailto: o un URL esterno — l'azione di un tap/click normale. */
   href: string;
-  /** Valore copiato negli appunti su tap prolungato (numero/email "puliti"). */
+  /** Valore copiato negli appunti su tap prolungato (numero/email/URL). */
   copyValue: string;
   icon: ReactNode;
   label: string;
   copiedLabel: string;
+  /** true per link esterni (LinkedIn/GitHub): apre in una nuova scheda. */
+  external?: boolean;
 }
 
 const LONG_PRESS_MS = 500;
@@ -25,6 +27,7 @@ export function ContactActionPill({
   icon,
   label,
   copiedLabel,
+  external,
 }: ContactActionPillProps) {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const longPressedRef = useRef(false);
@@ -74,6 +77,8 @@ export function ContactActionPill({
     <a
       className={`contact-pill${copied ? " contact-pill-copied" : ""}`}
       href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
       onPointerDown={startPress}
       onPointerUp={endPress}
       onPointerLeave={endPress}

@@ -1,5 +1,6 @@
 import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
+import { ScrollCue } from "@/components/ScrollCue";
 
 function formatRange(start: string, end: string) {
   return `${start} — ${end === "present" ? dictionary.experience.present : end}`;
@@ -36,6 +37,8 @@ export function Experience() {
           ))}
         </ol>
       </div>
+
+      <ScrollCue targetId="education" />
     </section>
   );
 }

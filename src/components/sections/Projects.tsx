@@ -2,6 +2,7 @@ import Link from "next/link";
 import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
 import { ArrowRightIcon } from "@/components/icons";
+import { ScrollCue } from "@/components/ScrollCue";
 
 export function Projects() {
   const projects = [...content.projects].sort((a, b) => a.order - b.order);
@@ -49,6 +50,8 @@ export function Projects() {
           </div>
         )}
       </div>
+
+      <ScrollCue targetId="experience" />
     </section>
   );
 }

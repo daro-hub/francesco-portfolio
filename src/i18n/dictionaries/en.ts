@@ -7,7 +7,7 @@ export const en = {
   },
   hero: {
     greeting: "Ready to dive in",
-    ctaResume: "Download CV (PDF)",
+    ctaResume: "See CV",
     linkedin: "LinkedIn",
     github: "GitHub",
     email: "Email",
@@ -16,10 +16,6 @@ export const en = {
     scrollCue: "Scroll to explore",
     copied: "Copied!",
     holdToCopyHint: "Tap to open · hold to copy",
-    githubStatsTitle: "On GitHub",
-    githubPublicRepos: "Public repos",
-    githubCommits: "Commits",
-    githubLanguages: "Languages used",
   },
   about: {
     title: "About",

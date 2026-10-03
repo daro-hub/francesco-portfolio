@@ -24,7 +24,8 @@ export const content: CVContent = {
     lookingFor:
       "I'm looking for an Erasmus+ 2026-2027 internship, and I'm genuinely open — any hands-on computer science work interests me, as long as I get to build real things instead of just studying them.",
   },
-  summary: "TODO: professional summary (3-5 lines) for the /cv page.",
+  summary:
+    "Full-stack developer building the platforms behind museum ticketing and visitor experiences at amuseapp — backoffice console, visitor webapp, mobile app, and the Android kiosk software that talks to payment hardware. Outside of work I design and ship AI-driven side projects solo, end to end: a RAG-based nutrition assistant, an algorithmic trading platform with a rigorously-tested backtesting engine, and an AI pipeline that turns source PDFs into finished PowerPoint decks. Currently completing a Master's in Computer Science (IoT, Big Data & ML) at the University of Udine, and looking for an Erasmus+ 2026-2027 internship to keep building real things.",
   stats: [],
   skills: [
     { area: "Frontend", skills: ["Next.js", "React", "TypeScript", "Tailwind CSS"] },

@@ -358,6 +358,11 @@ ol {
 }
 
 .doc-section {
+  /* Serve da containing block per .scroll-cue (position: absolute) in
+     ogni sezione — senza questo l'ancora più vicina sarebbe body, e
+     l'indicatore finirebbe fissato al fondo del body invece che al
+     fondo di ogni singola schermata. */
+  position: relative;
   padding: 6rem 1.5rem;
   scroll-snap-align: start;
   min-height: 100vh;
@@ -843,61 +848,6 @@ ol {
 
 .about-panel {
   padding: 2rem;
-}
-
-/* GitHub stats — numeri reali letti dall'API pubblica a build time, non
-   inventati (vedi src/lib/github.ts). Non è un link: niente hover/transform
-   che lo facciano sembrare cliccabile (era un <a> al profilo, ma non c'è
-   un'azione utile dietro un riepilogo di numeri). */
-.github-stats {
-  display: block;
-  margin-top: 2.5rem;
-  padding: 1.5rem 2rem;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-}
-
-.github-stats-title {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  margin-bottom: 1.25rem;
-}
-
-.github-stats-title svg {
-  width: 1rem;
-  height: 1rem;
-}
-
-.github-stats-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-
-.github-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.github-stat-value {
-  font-family: var(--font-display);
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: var(--color-accent);
-}
-
-.github-stat-label {
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
 }
 
 .about-text h3 {

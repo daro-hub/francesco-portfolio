@@ -1,5 +1,6 @@
 import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
+import { ScrollCue } from "@/components/ScrollCue";
 
 export function About() {
   return (
@@ -38,6 +39,8 @@ export function About() {
           </div>
         </div>
       </div>
+
+      <ScrollCue targetId="projects" />
     </section>
   );
 }

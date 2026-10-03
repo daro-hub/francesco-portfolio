@@ -2,7 +2,7 @@ import Link from "next/link";
 import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
 import { ContactActionPill } from "@/components/ContactActionPill";
-import { getGithubStats } from "@/lib/github";
+import { ScrollCue } from "@/components/ScrollCue";
 
 function MailIcon() {
   return (
@@ -37,18 +37,16 @@ function GithubIcon() {
   );
 }
 
-function DownloadIcon() {
+function EyeIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
-      <path d="M12 3.5v11" strokeLinecap="round" />
-      <path d="M7.5 10.5L12 15l4.5-4.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M5 20.5h14" strokeLinecap="round" />
+      <path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12z" strokeLinejoin="round" />
+      <circle cx="12" cy="12" r="2.6" />
     </svg>
   );
 }
 
-export async function Hero() {
-  const githubStats = await getGithubStats();
+export function Hero() {
   const { fullName, tagline, contact, photo } = content.personal;
   const [firstName, ...rest] = fullName.split(" ");
   const initials = fullName
@@ -83,6 +81,7 @@ export async function Hero() {
     {
       key: "linkedin",
       href: contact.linkedin,
+      copyValue: contact.linkedin,
       icon: <LinkedInIcon />,
       value: `${dictionary.hero.linkedin} · FDRZ`,
       todo: contact.linkedin === "TODO",
@@ -90,6 +89,7 @@ export async function Hero() {
     {
       key: "github",
       href: contact.github,
+      copyValue: contact.github,
       icon: <GithubIcon />,
       value: `${dictionary.hero.github} · daro-hub`,
       todo: contact.github === "TODO",
@@ -115,14 +115,11 @@ export async function Hero() {
             <p className="hero-location">{contact.location}</p>
           )}
 
-          {/* Due grid separate invece di una sola: solo phone/email
-              supportano il tap-prolungato-per-copiare (ContactActionPill),
-              quindi l'hint "hold to copy" deve stare attaccato solo a
-              quella coppia — prima stava sotto l'intero blocco di 4
-              pillole, facendo sembrare che valesse anche per
-              LinkedIn/GitHub. */}
+          {/* Le 4 pillole supportano tutte tap-prolungato-per-copiare
+              (telefono/email copiano il valore "pulito", LinkedIn/GitHub
+              copiano l'URL del profilo) — un'unica grid, un unico hint. */}
           <div className="contact-pills">
-            {actionPills.map((pill) =>
+            {[...actionPills, ...linkPills].map((pill) =>
               pill.todo ? (
                 <span key={pill.key} className="contact-pill contact-pill-todo" aria-disabled="true">
                   <span className="contact-pill-icon" aria-hidden="true">
@@ -138,66 +135,20 @@ export async function Hero() {
                   icon={pill.icon}
                   label={pill.value}
                   copiedLabel={dictionary.hero.copied}
+                  external={pill.key === "linkedin" || pill.key === "github"}
                 />
               ),
             )}
           </div>
           <p className="contact-pills-hint">{dictionary.hero.holdToCopyHint}</p>
 
-          <div className="contact-pills contact-pills-links">
-            {linkPills.map((pill) =>
-              pill.todo ? (
-                <span key={pill.key} className="contact-pill contact-pill-todo" aria-disabled="true">
-                  <span className="contact-pill-icon" aria-hidden="true">
-                    {pill.icon}
-                  </span>
-                  <span className="contact-pill-label">TODO</span>
-                </span>
-              ) : (
-                <a key={pill.key} className="contact-pill" href={pill.href} target="_blank" rel="noreferrer">
-                  <span className="contact-pill-icon" aria-hidden="true">
-                    {pill.icon}
-                  </span>
-                  <span className="contact-pill-label">{pill.value}</span>
-                </a>
-              ),
-            )}
-          </div>
-
-          {/* Download CV: azione secondaria e facoltativa (non la CTA
-              principale della hero) — link testuale defilato invece di un
-              bottone pieno, per non spingere subito verso il download. */}
+          {/* Porta alla pagina /cv per leggerlo (non lo scarica — il vero
+              download è il bottone "Download PDF" su quella pagina), quindi
+              l'etichetta dice "See CV", non "Download". */}
           <Link href="/cv" className="cv-link-subtle">
-            <DownloadIcon />
+            <EyeIcon />
             {dictionary.hero.ctaResume}
           </Link>
-
-          {githubStats && (
-            // div, non link: non c'è un'azione sensata al click (non è un
-            // riepilogo cliccabile, solo numeri), ed essendo dentro un box
-            // con lo stesso stile delle altre pillole cliccabili sembrava
-            // invitare al click senza portare da nessuna parte di utile.
-            <div className="github-stats">
-              <span className="github-stats-title">
-                <GithubIcon />
-                {dictionary.hero.githubStatsTitle}
-              </span>
-              <div className="github-stats-row">
-                <div className="github-stat">
-                  <span className="github-stat-value">{githubStats.publicRepos}</span>
-                  <span className="github-stat-label">{dictionary.hero.githubPublicRepos}</span>
-                </div>
-                <div className="github-stat">
-                  <span className="github-stat-value">{githubStats.commitCount}</span>
-                  <span className="github-stat-label">{dictionary.hero.githubCommits}</span>
-                </div>
-                <div className="github-stat">
-                  <span className="github-stat-value">{githubStats.languageCount}</span>
-                  <span className="github-stat-label">{dictionary.hero.githubLanguages}</span>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
 
         <div className="hero-portrait">
@@ -230,9 +181,7 @@ export async function Hero() {
         </div>
       </div>
 
-      <a href="#about" className="scroll-cue" aria-label={dictionary.hero.scrollCue}>
-        <span />
-      </a>
+      <ScrollCue targetId="about" />
     </section>
   );
 }
