@@ -11,6 +11,7 @@
   --color-text-muted: #9aa3c2;
   --color-border: rgba(255, 255, 255, 0.1);
   --color-border-strong: rgba(255, 255, 255, 0.16);
+  --color-dot: rgba(255, 255, 255, 0.09);
 
   --color-accent: #3b6bff;
   --color-accent-soft: rgba(59, 107, 255, 0.14);
@@ -34,6 +35,7 @@
   --color-text-muted: #565f80;
   --color-border: rgba(16, 19, 28, 0.09);
   --color-border-strong: rgba(16, 19, 28, 0.16);
+  --color-dot: rgba(16, 19, 28, 0.07);
 
   --color-accent: #2f5fe0;
   --color-accent-soft: rgba(47, 95, 224, 0.1);
@@ -100,6 +102,9 @@ ol {
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  /* Dot grid texture, sits behind the blobs (painted after in DOM order). */
+  background-image: radial-gradient(var(--color-dot) 1px, transparent 1.4px);
+  background-size: 22px 22px;
 }
 
 .blob {
@@ -155,10 +160,8 @@ ol {
   justify-content: space-between;
   gap: 1rem;
   padding: 0 1.5rem;
-  background: color-mix(in srgb, var(--color-bg) 72%, transparent);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--color-border);
-  transition: background-color 0.6s ease, border-color 0.6s ease;
+  background: transparent;
+  border-bottom: none;
 }
 
 .site-logo {
@@ -511,15 +514,32 @@ ol {
   color: var(--color-accent);
 }
 
+/* Tag "Full-Stack Developer": badge con una fascia d'accento piena e
+   leggermente inclinata dietro al testo, invece del precedente corsivo
+   editoriale — stesso ruolo (sottotitolo subito sotto il nome), diverso
+   linguaggio: più da "etichetta di prodotto" che da nota a margine. */
 .hero-tagline {
-  font-family: var(--font-voice), var(--font-body);
-  font-style: italic;
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-  max-width: 34rem;
-  margin: 0 0 1.5rem;
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-accent-contrast);
+  padding: 0.4rem 1rem;
+  margin: 0.25rem 0 1.5rem;
+}
+
+.hero-tagline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  opacity: 0.85;
+  transform: skewX(-8deg);
+  border-radius: 4px;
+  z-index: -1;
 }
 
 .hero-location {
