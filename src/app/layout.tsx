@@ -20,13 +20,22 @@ export const metadata: Metadata = {
   description: content.summary,
 };
 
-// Applica il tema salvato prima dell'idratazione, per evitare un flash del tema sbagliato.
-// Default: dark (l'identità visiva del sito è pensata prima di tutto per il tema scuro).
+// Applica il tema giusto prima dell'idratazione, per evitare un flash del
+// tema sbagliato. Priorità: una scelta manuale salvata (localStorage) vince
+// sempre; altrimenti, alla primissima visita, segue la preferenza del
+// browser/OS (prefers-color-scheme) invece di forzare sempre dark — il
+// toggle manuale resta comunque disponibile e, una volta usato, sovrascrive
+// la preferenza di sistema per le visite successive.
 const themeInitScript = `
 (function () {
   try {
     var stored = localStorage.getItem('theme');
-    var theme = stored === 'light' ? 'light' : 'dark';
+    var theme;
+    if (stored === 'light' || stored === 'dark') {
+      theme = stored;
+    } else {
+      theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
     document.documentElement.setAttribute('data-theme', theme);
   } catch (e) {}
 })();
@@ -38,6 +47,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${newsreader.variable}`}
       data-theme="dark"
+      // themeInitScript (sotto, in <head>) sovrascrive data-theme prima
+      // dell'idratazione, per evitare un flash del tema sbagliato — ma
+      // questo fa sì che React veda un attributo diverso da quello che ha
+      // renderizzato lato server ogni volta che il tema reale è "light".
+      // suppressHydrationWarning non basta (sopprime solo i mismatch sul
+      // contenuto testuale di un nodo, non sugli attributi — confermato
+      // provandolo: il warning restava identico con o senza), e togliere
+      // del tutto data-theme dal JSX produce comunque un mismatch (React
+      // segnala anche un attributo presente solo lato client). Il warning
+      // è quindi ineliminabile con questo pattern — ma è una delle
+      // eccezioni note e innocue: solo in `next dev`, mai in produzione
+      // (React rimuove questi controlli/log nella build di produzione),
+      // quindi non arriva a chi visita il sito statico esportato.
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

@@ -18,8 +18,8 @@ export const en = {
     holdToCopyHint: "Tap to open · hold to copy",
     githubStatsTitle: "On GitHub",
     githubPublicRepos: "Public repos",
-    githubStars: "Stars",
-    githubFollowers: "Followers",
+    githubCommits: "Commits",
+    githubLanguages: "Languages used",
   },
   about: {
     title: "About",
@@ -49,6 +49,7 @@ export const en = {
   },
   cv: {
     download: "Download PDF",
+    downloading: "Preparing PDF…",
     back: "Back to site",
   },
   theme: {

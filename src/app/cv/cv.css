@@ -86,6 +86,26 @@
   color: #565f80;
 }
 
+/* Su schermi piccoli, il padding fisso in mm (pensato per il foglio A4
+   stampato) lasciava pochissima larghezza utile al testo — es. su un
+   telefono da 375px restavano ~230px di contenuto, con wrapping
+   eccessivo. Qui si usano unità relative al viewport invece che mm, per
+   lasciare più spazio al testo mentre si resta leggibili. */
+@media (max-width: 767px) {
+  .cv-page {
+    padding: calc(var(--header-height) + 1.25rem) 0.5rem 2.5rem;
+  }
+
+  .cv-sheet {
+    border-radius: 14px;
+    padding: 1.5rem 1.1rem;
+  }
+
+  .cv-header h1 {
+    font-size: 1.4rem;
+  }
+}
+
 @media print {
   .no-print {
     display: none !important;

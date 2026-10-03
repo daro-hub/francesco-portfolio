@@ -58,7 +58,10 @@ body {
   color: var(--color-text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  /* Era 0.25s: il cambio dark/light sembrava uno scatto secco invece di
+     una dissolvenza. 0.6s resta percepibile come "animazione" senza
+     sembrare lento ad aspettare. */
+  transition: background-color 0.6s ease, color 0.6s ease;
   position: relative;
 }
 
@@ -155,6 +158,7 @@ ol {
   background: color-mix(in srgb, var(--color-bg) 72%, transparent);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.6s ease, border-color 0.6s ease;
 }
 
 .site-logo {
@@ -215,9 +219,15 @@ ol {
 }
 
 .menu-toggle span {
+  /* .menu-toggle is a column flex container with the default
+     align-items: stretch, so each span stretches to the button's full
+     available width minus its own horizontal margin. 8px of margin on
+     each side left only ~8px of visible bar inside a 38px button —
+     three short stubs instead of proper hamburger lines. 3px leaves
+     real bars while still inset from the button's edges. */
   display: block;
   height: 2px;
-  margin: 0 8px;
+  margin: 0 3px;
   background: var(--color-text);
   border-radius: 1px;
 }
@@ -230,7 +240,13 @@ ol {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  background: var(--color-bg-elevated);
+  /* --color-bg-elevated is a near-transparent tint (5% white in dark
+     mode) meant for subtle surfaces sitting *within* the normal page
+     flow — used here, it let the hero heading behind the menu bleed
+     straight through the nav links. This is an overlay meant to cover
+     the page, so it needs an actually solid, theme-aware background;
+     --color-bg-secondary is already that (opaque in both themes). */
+  background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 0.5rem;
@@ -306,6 +322,14 @@ ol {
   height: 100vh;
   height: 100dvh;
   overflow-y: auto;
+  /* Senza questo, superare lo scroll massimo (es. trascinando oltre il
+     fondo della pagina su mobile) può far "incatenare" il gesto di
+     overscroll al documento esterno (html/body) invece che restare
+     contenuto qui — a quel punto il browser mostra il rimbalzo sulla
+     pagina intera e un nuovo tocco è necessario per tornare a scorrere
+     normalmente il contenitore. contain lo impedisce: l'overscroll
+     resta e si esaurisce dentro questo elemento. */
+  overscroll-behavior-y: contain;
   /* proximity, non mandatory: About/Education possono superare un viewport
      su schermi piccoli, e il salto di sezione "a blocchi" è comunque
      gestito via JS (useBlockScroll) — lo snap CSS resta solo un fallback
@@ -426,7 +450,7 @@ ol {
 
 .section-index-item {
   flex: 1 1 0;
-  width: 0.2rem;
+  width: 0.4rem;
   border-radius: var(--radius-pill);
   background: var(--color-border-strong);
   opacity: 0.55;
@@ -440,7 +464,7 @@ ol {
 }
 
 .section-index-item.active {
-  width: 0.3rem;
+  width: 0.55rem;
   background: var(--color-accent);
   opacity: 1;
   box-shadow: 0 0 18px 2px var(--color-accent-soft);
@@ -692,22 +716,43 @@ ol {
   bottom: 1.75rem;
   transform: translateX(-50%);
   display: none;
-  width: 1.6rem;
-  height: 2.6rem;
-  border: 1.5px solid var(--color-border-strong);
+  width: 1.7rem;
+  height: 2.75rem;
+  /* --color-border-strong was too low-contrast against the hero
+     background to read as an affordance rather than decoration; the
+     accent color (already used for the moving dot) makes the whole
+     outline itself a visible, recognizable "scroll" cue. */
+  border: 1.5px solid var(--color-accent);
+  opacity: 0.6;
   border-radius: var(--radius-pill);
+  animation: scroll-cue-bounce 1.8s ease-in-out infinite;
 }
 
 .scroll-cue span {
   position: absolute;
-  top: 0.4rem;
+  top: 0.45rem;
   left: 50%;
-  width: 0.3rem;
-  height: 0.3rem;
-  margin-left: -0.15rem;
+  width: 0.35rem;
+  height: 0.35rem;
+  margin-left: -0.175rem;
   border-radius: 50%;
   background: var(--color-accent);
   animation: scroll-cue-move 1.8s ease-in-out infinite;
+}
+
+/* La "pillola" si muove leggermente insieme al pallino, invece di restare
+   un contorno statico fermo mentre solo il puntino interno si anima — il
+   movimento visibile era troppo piccolo per attirare l'occhio. */
+@keyframes scroll-cue-bounce {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateX(-50%) translateY(0.3rem);
+    opacity: 1;
+  }
 }
 
 @keyframes scroll-cue-move {
@@ -717,7 +762,7 @@ ol {
     opacity: 1;
   }
   50% {
-    transform: translateY(0.7rem);
+    transform: translateY(0.9rem);
     opacity: 0.4;
   }
 }
@@ -729,6 +774,7 @@ ol {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .scroll-cue,
   .scroll-cue span {
     animation: none;
   }
@@ -800,7 +846,9 @@ ol {
 }
 
 /* GitHub stats — numeri reali letti dall'API pubblica a build time, non
-   inventati (vedi src/lib/github.ts). L'intero blocco è un link al profilo. */
+   inventati (vedi src/lib/github.ts). Non è un link: niente hover/transform
+   che lo facciano sembrare cliccabile (era un <a> al profilo, ma non c'è
+   un'azione utile dietro un riepilogo di numeri). */
 .github-stats {
   display: block;
   margin-top: 2.5rem;
@@ -808,14 +856,7 @@ ol {
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  text-decoration: none;
   color: var(--color-text);
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.github-stats:hover {
-  border-color: rgba(59, 107, 255, 0.28);
-  transform: translateY(-2px);
 }
 
 .github-stats-title {

@@ -115,6 +115,12 @@ export async function Hero() {
             <p className="hero-location">{contact.location}</p>
           )}
 
+          {/* Due grid separate invece di una sola: solo phone/email
+              supportano il tap-prolungato-per-copiare (ContactActionPill),
+              quindi l'hint "hold to copy" deve stare attaccato solo a
+              quella coppia — prima stava sotto l'intero blocco di 4
+              pillole, facendo sembrare che valesse anche per
+              LinkedIn/GitHub. */}
           <div className="contact-pills">
             {actionPills.map((pill) =>
               pill.todo ? (
@@ -135,6 +141,10 @@ export async function Hero() {
                 />
               ),
             )}
+          </div>
+          <p className="contact-pills-hint">{dictionary.hero.holdToCopyHint}</p>
+
+          <div className="contact-pills contact-pills-links">
             {linkPills.map((pill) =>
               pill.todo ? (
                 <span key={pill.key} className="contact-pill contact-pill-todo" aria-disabled="true">
@@ -153,7 +163,6 @@ export async function Hero() {
               ),
             )}
           </div>
-          <p className="contact-pills-hint">{dictionary.hero.holdToCopyHint}</p>
 
           {/* Download CV: azione secondaria e facoltativa (non la CTA
               principale della hero) — link testuale defilato invece di un
@@ -164,12 +173,11 @@ export async function Hero() {
           </Link>
 
           {githubStats && (
-            <a
-              href={`https://github.com/${githubStats.username}`}
-              target="_blank"
-              rel="noreferrer"
-              className="github-stats"
-            >
+            // div, non link: non c'è un'azione sensata al click (non è un
+            // riepilogo cliccabile, solo numeri), ed essendo dentro un box
+            // con lo stesso stile delle altre pillole cliccabili sembrava
+            // invitare al click senza portare da nessuna parte di utile.
+            <div className="github-stats">
               <span className="github-stats-title">
                 <GithubIcon />
                 {dictionary.hero.githubStatsTitle}
@@ -180,15 +188,15 @@ export async function Hero() {
                   <span className="github-stat-label">{dictionary.hero.githubPublicRepos}</span>
                 </div>
                 <div className="github-stat">
-                  <span className="github-stat-value">{githubStats.totalStars}</span>
-                  <span className="github-stat-label">{dictionary.hero.githubStars}</span>
+                  <span className="github-stat-value">{githubStats.commitCount}</span>
+                  <span className="github-stat-label">{dictionary.hero.githubCommits}</span>
                 </div>
                 <div className="github-stat">
-                  <span className="github-stat-value">{githubStats.followers}</span>
-                  <span className="github-stat-label">{dictionary.hero.githubFollowers}</span>
+                  <span className="github-stat-value">{githubStats.languageCount}</span>
+                  <span className="github-stat-label">{dictionary.hero.githubLanguages}</span>
                 </div>
               </div>
-            </a>
+            </div>
           )}
         </div>
 
