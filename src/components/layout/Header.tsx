@@ -7,6 +7,7 @@ import { dictionary } from "@/i18n";
 import { content } from "@/resources/content";
 import { ThemeToggle } from "./ThemeToggle";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import { LogoMark } from "@/components/icons";
 
 const navItems = [
   { href: "#about", id: "about", label: dictionary.nav.about },
@@ -74,10 +75,12 @@ export function Header() {
     <header className="site-header" ref={headerRef}>
       {isHome ? (
         <a href="#top" className="site-logo">
+          <LogoMark />
           {logo}
         </a>
       ) : (
         <Link href="/" className="site-logo">
+          <LogoMark />
           {logo}
         </Link>
       )}

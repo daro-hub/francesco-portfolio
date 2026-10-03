@@ -46,6 +46,28 @@ export function PhoneIcon() {
   );
 }
 
+// Stesso mark di app/icon.svg (il favicon) — qui inline invece che <img>
+// per evitare qualunque problema di basePath su GitHub Pages e restare
+// nitido a qualsiasi dimensione.
+export function LogoMark() {
+  return (
+    <svg viewBox="0 0 64 64" width="26" height="26" aria-hidden="true">
+      <rect width="64" height="64" rx="14" fill="#3b6bff" />
+      <text
+        x="32"
+        y="43"
+        fontFamily="Arial, Helvetica, sans-serif"
+        fontSize="28"
+        fontWeight="700"
+        fill="#ffffff"
+        textAnchor="middle"
+      >
+        FD
+      </text>
+    </svg>
+  );
+}
+
 export function MapPinIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
