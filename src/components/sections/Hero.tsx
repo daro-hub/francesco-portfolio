@@ -3,6 +3,7 @@ import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
 import { ContactActionPill } from "@/components/ContactActionPill";
 import { ScrollCue } from "@/components/ScrollCue";
+import { withBasePath } from "@/lib/basePath";
 
 function MailIcon() {
   return (
@@ -155,7 +156,7 @@ export function Hero() {
           <div className={`hero-avatar${photo ? "" : " hero-avatar-placeholder"}`}>
             {photo ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={photo} alt={fullName} />
+              <img src={withBasePath(photo)} alt={fullName} />
             ) : (
               <>
                 <span className="hero-avatar-initials" aria-hidden="true">

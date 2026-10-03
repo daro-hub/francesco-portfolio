@@ -14,7 +14,7 @@ export const content: CVContent = {
       github: "https://github.com/daro-hub",
       location: "Belluno, Italy",
     },
-    // photo: "/images/francesco.jpg", // TODO: add a photo under public/images
+    photo: "/images/francesco.jpg",
   },
   about: {
     intro:
