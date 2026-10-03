@@ -342,12 +342,12 @@ ol {
      normalmente il contenitore. contain lo impedisce: l'overscroll
      resta e si esaurisce dentro questo elemento. */
   overscroll-behavior-y: contain;
-  /* proximity, non mandatory: About/Education possono superare un viewport
-     su schermi piccoli, e il salto di sezione "a blocchi" è comunque
-     gestito via JS (useBlockScroll) — lo snap CSS resta solo un fallback
-     per lo scroll nativo residuo dentro una sezione. */
-  scroll-snap-type: y proximity;
-  scroll-behavior: smooth;
+  /* Lo scroll "a blocchi" (snap CSS + salto netto via JS, vedi
+     useBlockScroll) è pensato per una finestra desktop orizzontale: su
+     mobile/tablet, o su una finestra desktop ridimensionata in verticale,
+     resta lo scroll nativo libero — nessuno snap, nessun salto a sezione. */
+  scroll-snap-type: none;
+  scroll-behavior: auto;
   /* Scrollbar nascosta: l'indice di sezione a barre verticali (destra) la
      sostituisce come indicatore di posizione. */
   scrollbar-width: none;
@@ -357,15 +357,17 @@ ol {
   display: none;
 }
 
-/* Sotto i 768px lo scroll resta completamente libero (niente blocchi a
-   schermata, vedi useBlockScroll): lo snap CSS va disattivato anche qui,
-   altrimenti resterebbe un residuo "a scatti" senza il beneficio del
-   salto netto tra sezioni. La linea divisoria qui sotto segna il confine
-   tra una sezione e la successiva al suo posto. */
-@media (max-width: 767px) {
+/* Stesso media query di useBlockScroll.ts (min-width 768px + orientamento
+   orizzontale): solo lì lo snap CSS fa da fallback al salto JS, altrimenti
+   resterebbe un residuo "a scatti" senza il beneficio del salto netto. */
+@media (min-width: 768px) and (orientation: landscape) {
   #scroll-container {
-    scroll-snap-type: none;
-    scroll-behavior: auto;
+    /* proximity, non mandatory: About/Education possono superare un
+       viewport su schermi piccoli, e il salto di sezione "a blocchi" è
+       comunque gestito via JS — lo snap CSS resta solo un fallback per
+       lo scroll nativo residuo dentro una sezione. */
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
   }
 }
 
@@ -384,7 +386,10 @@ ol {
   justify-content: center;
 }
 
-@media (max-width: 767px) {
+/* Stesso complemento del media query sopra: la linea divisoria tra
+   sezioni serve ovunque lo scroll sia libero (niente blocco a schermata),
+   non solo sotto i 768px. */
+@media (max-width: 767px), (orientation: portrait) {
   .doc-section {
     border-top: 1px solid var(--color-border);
   }
@@ -519,15 +524,8 @@ ol {
   margin: 0 0 1.1rem;
 }
 
-/* Il cognome rompe il font del nome: corsivo editoriale (Newsreader) contro
-   il grottesco geometrico bold (Space Grotesk) di "Francesco" — lo stesso
-   contrasto di font che prima viveva solo nella tagline, ora sul nome
-   stesso. */
 .hero-name .accent {
   color: var(--color-accent);
-  font-family: var(--font-voice), var(--font-body);
-  font-style: italic;
-  font-weight: 500;
 }
 
 /* Tag "Full-Stack Developer": badge con una fascia d'accento piena e
@@ -541,9 +539,9 @@ ol {
   align-items: center;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   color: var(--color-accent-contrast);
-  padding: 0.4rem 1rem;
+  padding: 0.6rem 1.4rem;
   margin: 0.25rem 0 1.5rem;
 }
 
@@ -559,9 +557,24 @@ ol {
 }
 
 .hero-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-size: 0.9rem;
   color: var(--color-text-muted);
   margin: 0 0 1.75rem;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.hero-location svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+}
+
+.hero-location:hover {
+  color: var(--color-accent);
 }
 
 .contact-pills {
@@ -755,7 +768,20 @@ ol {
 
 @media (min-width: 900px) {
   .hero-grid {
-    grid-template-columns: 1.3fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
+  }
+
+  .hero-copy {
+    max-width: 46rem;
+  }
+
+  /* "Francesco Da Rin Zanco" su un'unica riga: a 4rem (il massimo mobile)
+     il nome completo non ci sta nella colonna, anche allargata sopra —
+     qui il clamp ha un tetto più basso apposta per restare su una riga a
+     tutte le larghezze desktop comuni. */
+  .hero-name {
+    font-size: clamp(2.2rem, 2.6vw + 1.1rem, 2.9rem);
+    white-space: nowrap;
   }
 
   .hero-avatar {

@@ -2,7 +2,10 @@
 
 import { useEffect, type RefObject } from "react";
 
-const MOBILE_QUERY = "(max-width: 767px)";
+// Stesso media query usato in globals.css per lo snap CSS di
+// #scroll-container: tenerli allineati, altrimenti lo snap e il salto JS
+// si attiverebbero a soglie diverse.
+const DESKTOP_LANDSCAPE_QUERY = "(min-width: 768px) and (orientation: landscape)";
 
 /**
  * Scroll "a blocchi" reale: una rotellina/swipe = un salto alla sezione
@@ -16,10 +19,12 @@ const MOBILE_QUERY = "(max-width: 767px)";
  * salto alla sezione successiva scatta solo quando si è già arrivati al suo
  * bordo superiore/inferiore, così il contenuto extra resta leggibile.
  *
- * Su mobile (sotto i 768px, stesso breakpoint del resto del sito) lo scroll
- * resta completamente libero: niente blocchi a schermata, solo la linea
- * divisoria tra sezioni (vedi .doc-section in globals.css) a segnare dove
- * finisce una sezione e inizia la successiva.
+ * Attivo solo su una finestra desktop orizzontale (min-width 768px E
+ * orientamento landscape): su mobile/tablet, o su una finestra desktop
+ * ridimensionata in verticale, lo scroll resta completamente libero —
+ * niente blocchi a schermata, solo la linea divisoria tra sezioni (vedi
+ * .doc-section in globals.css) a segnare dove finisce una sezione e inizia
+ * la successiva.
  */
 export function useBlockScroll(
   containerRef: RefObject<HTMLElement | null>,
@@ -29,20 +34,20 @@ export function useBlockScroll(
     const container = containerRef.current;
     if (!container) return;
 
-    const mobileQuery = window.matchMedia(MOBILE_QUERY);
+    const query = window.matchMedia(DESKTOP_LANDSCAPE_QUERY);
     let detach: () => void = () => {};
 
     function sync() {
       detach();
-      detach = mobileQuery.matches ? () => {} : attach(container!, sectionSelector);
+      detach = query.matches ? attach(container!, sectionSelector) : () => {};
     }
 
     sync();
-    mobileQuery.addEventListener("change", sync);
+    query.addEventListener("change", sync);
 
     return () => {
       detach();
-      mobileQuery.removeEventListener("change", sync);
+      query.removeEventListener("change", sync);
     };
   }, [containerRef, sectionSelector]);
 }

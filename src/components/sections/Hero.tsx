@@ -3,6 +3,7 @@ import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
 import { ContactActionPill } from "@/components/ContactActionPill";
 import { ScrollCue } from "@/components/ScrollCue";
+import { MapPinIcon } from "@/components/icons";
 import { withBasePath } from "@/lib/basePath";
 
 function MailIcon() {
@@ -113,7 +114,15 @@ export function Hero() {
           <p className="hero-tagline">{tagline}</p>
 
           {contact.location !== "TODO" && (
-            <p className="hero-location">{contact.location}</p>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.location)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="hero-location"
+            >
+              <MapPinIcon />
+              {contact.location}
+            </a>
           )}
 
           {/* Le 4 pillole supportano tutte tap-prolungato-per-copiare
