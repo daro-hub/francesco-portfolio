@@ -38,6 +38,15 @@ const themeInitScript = `
     }
     document.documentElement.setAttribute('data-theme', theme);
   } catch (e) {}
+  try {
+    // Il sito scrolla dentro #scroll-container (vedi ScrollContainer.tsx),
+    // non il documento — ma Chrome può comunque tentare di ripristinare lo
+    // scrollTop di un elemento con id stabile per uno stesso URL, anche su
+    // una visita "fresca". Disattivarlo appena possibile, prima che React
+    // monti; ScrollContainer poi forza comunque scrollTop a 0 (o all'hash)
+    // appena il nodo esiste, nel caso il ripristino sia già scattato.
+    history.scrollRestoration = 'manual';
+  } catch (e) {}
 })();
 `;
 
