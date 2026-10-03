@@ -7,7 +7,7 @@ export const en = {
     education: "Education",
   },
   hero: {
-    greeting: "Ready to dive in",
+    greeting: "Hello world!",
     ctaResume: "See CV",
     linkedin: "LinkedIn",
     github: "GitHub",

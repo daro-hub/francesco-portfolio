@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter, Newsreader } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -15,9 +15,74 @@ const newsreader = Newsreader({
   variable: "--font-voice",
 });
 
+// URL pubblica reale (GitHub Pages, project page senza dominio custom —
+// vedi next.config.mjs/README.md), usata per i tag SEO/social che vogliono
+// un URL assoluto (canonical, Open Graph, Twitter card, JSON-LD). È una
+// costante indipendente da NEXT_PUBLIC_BASE_PATH: quel valore cambia in
+// base all'ambiente di build (vuoto in locale), ma i metadati devono
+// sempre puntare al sito pubblicato, non a dove sta girando la build.
+const siteUrl = "https://daro-hub.github.io/francesco-portfolio/";
+const pageTitle = `${content.personal.fullName} — ${content.personal.tagline}`;
+const ogImagePath = "images/francesco.jpg";
+
 export const metadata: Metadata = {
-  title: `${content.personal.fullName} — ${content.personal.tagline}`,
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: pageTitle,
+    template: `%s — ${content.personal.fullName}`,
+  },
   description: content.summary,
+  keywords: [
+    content.personal.fullName,
+    content.personal.tagline,
+    ...content.skills.flatMap((group) => group.skills),
+  ],
+  authors: [{ name: content.personal.fullName, url: content.personal.contact.github }],
+  creator: content.personal.fullName,
+  alternates: {
+    canonical: siteUrl,
+  },
+  openGraph: {
+    title: pageTitle,
+    description: content.summary,
+    url: siteUrl,
+    siteName: pageTitle,
+    images: [{ url: ogImagePath, width: 1200, height: 1200, alt: content.personal.fullName }],
+    locale: "en_US",
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: content.summary,
+    images: [ogImagePath],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a10" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f6fd" },
+  ],
+};
+
+// Person schema (JSON-LD): aiuta i motori di ricerca a collegare questo
+// sito all'identità reale di Francesco (rich result "Persona" invece di
+// una generica pagina web). filter(Boolean) scarta i contatti ancora TODO.
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: content.personal.fullName,
+  jobTitle: content.personal.tagline,
+  url: siteUrl,
+  image: `${siteUrl}${ogImagePath}`,
+  sameAs: [content.personal.contact.linkedin, content.personal.contact.github].filter(
+    (url) => url !== "TODO",
+  ),
 };
 
 // Applica il tema giusto prima dell'idratazione, per evitare un flash del
@@ -72,6 +137,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
       </head>
       <body>
         <div className="bg-aurora" aria-hidden="true">
