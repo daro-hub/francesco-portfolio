@@ -15,13 +15,14 @@ const newsreader = Newsreader({
   variable: "--font-voice",
 });
 
-// URL pubblica reale (GitHub Pages, project page senza dominio custom —
-// vedi next.config.mjs/README.md), usata per i tag SEO/social che vogliono
-// un URL assoluto (canonical, Open Graph, Twitter card, JSON-LD). È una
-// costante indipendente da NEXT_PUBLIC_BASE_PATH: quel valore cambia in
-// base all'ambiente di build (vuoto in locale), ma i metadati devono
-// sempre puntare al sito pubblicato, non a dove sta girando la build.
-const siteUrl = "https://daro-hub.github.io/francesco-portfolio/";
+// URL pubblica reale (dominio custom francesco.is-a.dev, puntato via CNAME
+// a GitHub Pages — vedi public/CNAME e next.config.mjs), usata per i tag
+// SEO/social che vogliono un URL assoluto (canonical, Open Graph, Twitter
+// card, JSON-LD). È una costante indipendente da NEXT_PUBLIC_BASE_PATH:
+// quel valore cambia in base all'ambiente di build (vuoto in locale), ma i
+// metadati devono sempre puntare al sito pubblicato, non a dove sta
+// girando la build.
+const siteUrl = "https://francescodarinzanco.is-a.dev/";
 const pageTitle = `${content.personal.fullName} — ${content.personal.tagline}`;
 const ogImagePath = "images/francesco.jpg";
 
