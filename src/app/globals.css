@@ -363,6 +363,20 @@ ol {
   /* Scrollbar nascosta: l'indice di sezione a barre verticali (destra) la
      sostituisce come indicatore di posizione. */
   scrollbar-width: none;
+  /* CSS Scroll Anchoring (default del browser): se un elemento sopra la
+     viewport cambia dimensione dopo il primo paint (web font che cambia
+     metriche al passaggio dal fallback al font reale, un componente che
+     monta lato client dopo l'idratazione, ecc.), il browser "compensa"
+     scrollando automaticamente per mantenere lo stesso contenuto a vista
+     — risultato osservato: atterraggio sempre allo stesso punto a metà
+     pagina (dentro Projects), riproducibile anche su reload/cache
+     svuotata, su Brave. ScrollContainer.tsx forza già scrollTop a 0 (o
+     all'hash) in un useLayoutEffect sincrono al mount, ma non può
+     impedire una compensazione che il browser applica DOPO, quando il
+     layout cambia più tardi — da qui l'esigenza di disattivare
+     l'ancoraggio stesso su questo contenitore, non solo correggerne
+     l'effetto a posteriori. */
+  overflow-anchor: none;
 }
 
 #scroll-container::-webkit-scrollbar {
