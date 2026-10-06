@@ -45,20 +45,9 @@ export default async function ProjectPage({
           {dictionary.projects.backToProjects}
         </Link>
 
-        {project.link ? (
-          <div className="project-preview project-preview-embed">
-            <iframe
-              src={project.link}
-              title={`${project.title} — live demo`}
-              className="project-preview-iframe"
-              loading="lazy"
-            />
-          </div>
-        ) : (
-          <div className="project-preview">
-            <span>{dictionary.projects.previewComingSoon}</span>
-          </div>
-        )}
+        <div className="project-preview">
+          <span>{dictionary.projects.previewComingSoon}</span>
+        </div>
 
         <div className="project-title-row">
           {project.icon && <ProjectIcon name={project.icon.name} color={project.icon.color} size="lg" />}
