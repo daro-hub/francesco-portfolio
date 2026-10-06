@@ -32,6 +32,7 @@ export const en = {
   projects: {
     title: "Projects",
     viewDetails: "View project",
+    spotlight: "Flagship project",
     empty: "Featured projects coming soon.",
     backToProjects: "Back to projects",
     concept: "The idea",

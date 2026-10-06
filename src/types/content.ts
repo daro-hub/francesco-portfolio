@@ -61,6 +61,7 @@ export interface Project {
   repos: ProjectRepo[];
   tags: string[];
   featured: boolean;
+  spotlight?: boolean; // il progetto di punta: card a tutta larghezza in cima alla griglia, con badge
   order: number;
 }
 

@@ -71,6 +71,22 @@ export const content: CVContent = {
   ],
   projects: [
     {
+      slug: "second-brain",
+      title: "Second Brain — Aira, a Personal AI Assistant",
+      description:
+        "A personal AI assistant I talk to in plain language, by text or voice, on Telegram or the web. It answers from my own notes and from live data across my calendar, email, code, issues, and fitness tracking.",
+      concept:
+        "Everything I need to know about my own life and work is scattered across a dozen apps: calendar, email, GitHub, Linear, Strava, a password manager, my university notes. Second Brain is one assistant, Aira, that sits on top of all of them. I just ask, the way I would ask a human assistant, with no commands to remember. Every source is queried live instead of being copied into a database, so the answers are never stale.",
+      longDescription:
+        "Every message, typed or spoken, goes through a single shared pipeline. A classifier works out the intent, then routes the message to the right source: a RAG knowledge base on Supabase pgvector (with full-text search) for notes and university material, structured workout logs with automatic personal-record detection, or live API calls to Google Calendar, Gmail, GitHub, Linear, and Strava. Voice messages are transcribed, answered, and replied to with synthesized speech. Passwords are fetched locally through the Bitwarden CLI and never pass through the language model.\n\nThe same pipeline powers three front ends: a Telegram bot running as a Vercel webhook (so it works without my computer switched on), a full-screen web interface with hands-free voice mode that shows in real time which data sources each answer came from, and an MCP server that exposes every capability to Claude Code and Cursor. A password-protected Next.js dashboard brings the data together: a daily timeline that overlays heart rate, steps, meals, lessons, and workouts, plus a view that correlates different sources and refuses to show a correlation until enough data exists to back it.\n\nRouting quality is treated as something to test, not guess. A Vitest suite covers the core logic, and an eval set of real phrases that the bot once misrouted is replayed against the live model whenever the router changes. Next on the roadmap is an agentic worker: a job sent from Telegram runs a Claude Agent SDK session on my repositories, and any action with external effects waits for an approval tap.",
+      role: "Designed and built solo, end to end: the routing pipeline, every integration, the voice loop, the MCP server, the dashboard, and the test and eval tooling. It's the tool I use most every day.",
+      repos: [{ label: "Repository", url: "https://github.com/daro-hub/second-brain" }],
+      tags: ["Next.js", "TypeScript", "Supabase pgvector", "OpenAI", "RAG", "MCP", "Telegram bot", "Voice"],
+      featured: true,
+      spotlight: true,
+      order: 0,
+    },
+    {
       slug: "longevity",
       title: "Longevity — AI Nutrition Assistant",
       description:
