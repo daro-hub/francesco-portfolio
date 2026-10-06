@@ -73,6 +73,7 @@ export const content: CVContent = {
     {
       slug: "second-brain",
       title: "Second Brain — Aira, a Personal AI Assistant",
+      icon: { name: "brain", color: "#ff6fae" },
       description:
         "A personal AI assistant I talk to in plain language, by text or voice, on Telegram or the web. It answers from my own notes and from live data across my calendar, email, code, issues, and fitness tracking.",
       concept:
@@ -89,6 +90,7 @@ export const content: CVContent = {
     {
       slug: "longevity",
       title: "Longevity — AI Nutrition Assistant",
+      icon: { name: "apple", color: "#4ade80" },
       description:
         "AI nutrition assistant that answers only from scientific sources, via retrieval-augmented generation.",
       concept:
@@ -108,6 +110,7 @@ export const content: CVContent = {
     {
       slug: "orbis",
       title: "Orbis — Algorithmic Trading Platform",
+      icon: { name: "candles", color: "#f5b73b" },
       description:
         "Automated trading and backtesting platform for Bitcoin, NASDAQ 100, and Gold, with live strategy execution.",
       concept:
@@ -123,6 +126,7 @@ export const content: CVContent = {
     {
       slug: "scolastica",
       title: "Scolastica — AI Educational Content Generator",
+      icon: { name: "slides", color: "#ff8a4c" },
       description:
         "Turns source PDFs into template-matching PowerPoint decks, quizzes, subtitles, and interactive maps — a manual, hours-long process cut down to about 30 minutes.",
       concept:

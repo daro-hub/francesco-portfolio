@@ -70,9 +70,16 @@
   border: none;
 }
 
+.project-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+}
+
 .project-title {
   font-size: clamp(1.7rem, 4vw, 2.25rem);
-  margin: 0 0 1.25rem;
+  margin: 0;
 }
 
 .project-page-tags {

@@ -1,3 +1,5 @@
+import type { ProjectIconName } from "@/components/icons";
+
 // Schema dei contenuti del CV/portfolio.
 // I valori veri vengono compilati in src/resources/content.ts durante la fase di contenuto,
 // non durante questo scaffolding.
@@ -53,6 +55,7 @@ export interface ProjectRepo {
 export interface Project {
   slug: string; // usato nell'URL della pagina di dettaglio: /projects/<slug>/
   title: string;
+  icon?: { name: ProjectIconName; color: string }; // icona a sinistra del titolo, nella card e nella pagina
   description: string; // breve, per la card nella home
   concept?: string; // il "perché"/l'idea di partenza, se distinta dal "come funziona"
   longDescription: string; // dettagliata (come funziona), per la pagina del progetto

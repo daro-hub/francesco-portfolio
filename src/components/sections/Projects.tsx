@@ -2,7 +2,7 @@ import Link from "next/link";
 import { content } from "@/resources/content";
 import type { Project } from "@/types/content";
 import { dictionary } from "@/i18n";
-import { ArrowRightIcon } from "@/components/icons";
+import { ArrowRightIcon, ProjectIcon } from "@/components/icons";
 import { ScrollCue } from "@/components/ScrollCue";
 
 function ProjectCard({ project }: { project: Project }) {
@@ -14,19 +14,10 @@ function ProjectCard({ project }: { project: Project }) {
       {project.spotlight && (
         <span className="project-spotlight-badge">{dictionary.projects.spotlight}</span>
       )}
-      {project.link && (
-        <div className="project-card-thumb">
-          <iframe
-            src={project.link}
-            title=""
-            tabIndex={-1}
-            aria-hidden="true"
-            className="project-card-thumb-iframe"
-            loading="lazy"
-          />
-        </div>
-      )}
-      <h3>{project.title}</h3>
+      <div className="project-card-heading">
+        {project.icon && <ProjectIcon name={project.icon.name} color={project.icon.color} />}
+        <h3>{project.title}</h3>
+      </div>
       <p>{project.description}</p>
       <ul className="project-tags">
         {project.tags.map((tag) => (

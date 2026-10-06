@@ -121,3 +121,53 @@ export function ImagePlaceholderIcon() {
     </svg>
   );
 }
+
+// Icone dei progetti (tracciati derivati da Lucide, ISC). Il colore arriva da
+// ProjectIcon tramite --project-icon-color, così card e pagina di dettaglio
+// usano la stessa tinta senza duplicarla nei CSS.
+export type ProjectIconName = "brain" | "apple" | "candles" | "slides";
+
+const projectIconPaths: Record<ProjectIconName, React.ReactNode> = {
+  brain: (
+    <>
+      <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" />
+      <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" />
+      <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4" />
+      <path d="M17.599 6.5a3 3 0 0 0 .399-1.375M6.003 5.125A3 3 0 0 0 6.401 6.5M3.477 10.896a4 4 0 0 1 .585-.396M19.938 10.5a4 4 0 0 1 .585.396M6 18a4 4 0 0 1-1.967-.516M19.967 17.484A4 4 0 0 1 18 18" />
+    </>
+  ),
+  apple: (
+    <>
+      <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.91 4.91 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z" />
+      <path d="M10 2c1 .5 2 2 2 5" />
+    </>
+  ),
+  candles: (
+    <>
+      <path d="M9 5v4M9 15v2M17 3v2M17 13v3M3 3v18h18" />
+      <rect x="7" y="9" width="4" height="6" rx="1" />
+      <rect x="15" y="5" width="4" height="8" rx="1" />
+    </>
+  ),
+  slides: (
+    <>
+      <path d="M2 3h20" />
+      <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" />
+      <path d="m7 21 5-5 5 5" />
+    </>
+  ),
+};
+
+export function ProjectIcon({ name, color, size = "md" }: { name: ProjectIconName; color: string; size?: "md" | "lg" }) {
+  return (
+    <span
+      className={`project-icon project-icon-${size}`}
+      style={{ "--project-icon-color": color } as React.CSSProperties}
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        {projectIconPaths[name]}
+      </svg>
+    </span>
+  );
+}

@@ -1090,29 +1090,54 @@ ol {
   border-color: rgba(59, 107, 255, 0.28);
 }
 
-.project-card-thumb {
-  margin: -1.75rem -1.75rem 1.25rem;
-  aspect-ratio: 16 / 10;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  overflow: hidden;
-  position: relative;
-  background: var(--color-bg-secondary);
+.project-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 0 0 0.75rem;
 }
 
-.project-card-thumb-iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  border: none;
-  transform: scale(0.5);
-  transform-origin: top left;
-  pointer-events: none;
+/* Tile dell'icona progetto: tinta del progetto (--project-icon-color, da
+   content.ts) su fondo e bordo tenui, stesso linguaggio arrotondato delle card. */
+.project-icon {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 0.85rem;
+  color: var(--project-icon-color);
+  background: color-mix(in srgb, var(--project-icon-color) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--project-icon-color) 40%, transparent);
+  box-shadow: 0 0 24px -6px color-mix(in srgb, var(--project-icon-color) 70%, transparent);
+}
+
+.project-icon svg {
+  width: 58%;
+  height: 58%;
+  stroke-width: 1.8;
+}
+
+/* In light mode le tinte chiare (rosa, verde, ambra) su fondo bianco perdono
+   contrasto: scuriscile un po' mantenendo la stessa tonalità. */
+[data-theme="light"] .project-icon {
+  color: color-mix(in srgb, var(--project-icon-color) 78%, #000);
+}
+
+.project-icon-lg {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 1.05rem;
+}
+
+.project-card-spotlight .project-icon {
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 1rem;
 }
 
 .project-card h3 {
-  margin: 0 0 0.6rem;
+  margin: 0;
   font-size: 1.15rem;
 }
 
@@ -1195,7 +1220,10 @@ ol {
 
 .project-card-spotlight h3 {
   font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem);
-  margin-bottom: 0.8rem;
+}
+
+.project-card-spotlight .project-card-heading {
+  margin-bottom: 0.9rem;
 }
 
 .project-card-spotlight p {

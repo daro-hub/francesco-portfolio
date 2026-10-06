@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
-import { ArrowLeftIcon } from "@/components/icons";
+import { ArrowLeftIcon, ProjectIcon } from "@/components/icons";
 import "./project.css";
 
 export function generateStaticParams() {
@@ -60,7 +60,10 @@ export default async function ProjectPage({
           </div>
         )}
 
-        <h1 className="project-title">{project.title}</h1>
+        <div className="project-title-row">
+          {project.icon && <ProjectIcon name={project.icon.name} color={project.icon.color} size="lg" />}
+          <h1 className="project-title">{project.title}</h1>
+        </div>
 
         <ul className="project-tags project-page-tags">
           {project.tags.map((tag) => (
