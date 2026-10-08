@@ -256,7 +256,7 @@ export const content: CVContent = {
   ],
   languages: [
     { language: "Italian", level: "Native" },
-    { language: "English", level: "B2 – Upper intermediate" },
+    { language: "English", level: "Good working level" },
     { language: "French", level: "Elementary" },
   ],
   volunteer: [

@@ -23,7 +23,7 @@ candidatura/tirocinio.
 ## Positioning
 
 Full-stack developer in produzione (amuseapp: console, webapp, app mobile, kiosk Android) con progetti AI
-costruiti in autonomia; Second Brain è il progetto di punta. Cerca un tirocinio Erasmus+ 2026-2027. Inglese B2.
+costruiti in autonomia; Second Brain è il progetto di punta. Cerca un tirocinio Erasmus+ 2026-2027. Inglese: buon livello (non certificato, niente livello CEFR nel CV).
 Scolastica è dichiarato MVP e Orbis un prototipo mai arrivato a MVP: niente claim oltre lo stato reale.
 
 ## Operating Context
