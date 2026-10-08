@@ -7,6 +7,7 @@
 
 import { jsPDF } from "jspdf";
 import { content } from "@/resources/content";
+import { cvProjects, formatPeriod, shortRepoUrl } from "@/lib/cvFormat";
 
 const MARGIN_MM = 18;
 const PAGE_WIDTH_MM = 210; // A4
@@ -29,7 +30,8 @@ export function generateCvPdf(): void {
   }
 
   function addHeading(text: string) {
-    ensureSpace(12);
+    ensureSpace(24);
+    y += 2;
     doc.setFont("helvetica", "bold");
     doc.setFontSize(13);
     doc.setTextColor(...INK);
@@ -40,8 +42,10 @@ export function generateCvPdf(): void {
     y += 6;
   }
 
-  function addSubheading(text: string) {
-    ensureSpace(6);
+  // `needed`: spazio minimo da riservare, così titolo e testo che lo segue non
+  // finiscono su pagine diverse (titolo orfano a fondo pagina).
+  function addSubheading(text: string, needed = 6) {
+    ensureSpace(needed);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(10.5);
     doc.setTextColor(...INK);
@@ -69,6 +73,19 @@ export function generateCvPdf(): void {
       y += 5;
     }
     y += 2;
+  }
+
+  function addSkillLine(text: string) {
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(30, 33, 44);
+    const lines: string[] = doc.splitTextToSize(text, CONTENT_WIDTH_MM);
+    for (const line of lines) {
+      ensureSpace(5);
+      doc.text(line, MARGIN_MM, y);
+      y += 5;
+    }
+    y += 0.5;
   }
 
   function addBullets(items: string[]) {
@@ -101,11 +118,12 @@ export function generateCvPdf(): void {
 
   const contactLine = [
     content.personal.contact.location,
+    content.personal.contact.phone,
     content.personal.contact.email,
     content.personal.contact.linkedin,
     content.personal.contact.github,
   ]
-    .filter((value) => value && value !== "TODO")
+    .filter(Boolean)
     .join("   ·   ");
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
@@ -127,27 +145,37 @@ export function generateCvPdf(): void {
 
   addHeading("Technical Skills");
   content.skills.forEach((group) => {
-    addParagraph(`${group.area}: ${group.skills.length > 0 ? group.skills.join(", ") : "TODO"}`);
+    addSkillLine(`${group.area}: ${group.skills.join(", ")}`);
   });
 
   addHeading("Professional Experience");
   content.experience.forEach((exp) => {
     addSubheading(`${exp.role} — ${exp.company}`);
     addMeta(
-      `${exp.startDate} – ${exp.endDate === "present" ? "Present" : exp.endDate}` +
+      formatPeriod(exp.startDate, exp.endDate) +
         (exp.location ? ` · ${exp.location}` : ""),
     );
     if (exp.highlights.length > 0) addBullets(exp.highlights);
+  });
+
+  addHeading("Projects");
+  cvProjects(content.projects).forEach((project) => {
+    addSubheading(`${project.title}${project.status ? ` (${project.status})` : ""}`, 26);
+    const repo = shortRepoUrl(project);
+    if (repo) addMeta(repo);
+    addParagraph(project.cvSummary ?? "");
   });
 
   addHeading("Education");
   content.education.forEach((edu) => {
     addSubheading(edu.degree);
     addMeta(
-      `${edu.institution}${edu.location ? ` · ${edu.location}` : ""} · ${edu.startDate} – ${
-        edu.endDate === "present" ? "Present" : edu.endDate
-      }`,
+      `${edu.institution}${edu.location ? ` · ${edu.location}` : ""} · ${formatPeriod(
+        edu.startDate,
+        edu.endDate,
+      )}`,
     );
+    (edu.details ?? []).forEach((detail) => addMeta(detail));
   });
 
   addHeading("Languages");
@@ -160,6 +188,6 @@ export function generateCvPdf(): void {
     });
   }
 
-  const fileSlug = content.personal.fullName.trim().toLowerCase().replace(/\s+/g, "-");
-  doc.save(`cv-${fileSlug}.pdf`);
+  const fileSlug = content.personal.fullName.trim().replace(/\s+/g, "_");
+  doc.save(`${fileSlug}_CV.pdf`);
 }

@@ -29,12 +29,12 @@ Genera l'export statico in `out/` (usato dal workflow di deploy).
 - `src/i18n/` — dizionario stringhe UI. Solo l'inglese (`en`) è attivo; la tendina lingua in alto a destra mostra un messaggio se si seleziona una lingua non ancora supportata
 - `src/components/` — componenti layout (Header, ThemeToggle, LanguageSwitcher, SectionDots) e sezioni della home
 
-## Stato contenuti
+## CV in PDF
 
-I campi marcati `TODO` in `src/resources/content.ts` vanno ancora compilati con i
-dati reali (contatti, skill per area, dettagli esperienze/education, progetti in
-evidenza, numeri concreti su utenti/performance/repository gestiti, lingue,
-eventuale foto).
+Il bottone "Download PDF" in `/cv` genera il file con jsPDF (`src/lib/generateCvPdf.ts`) a partire da
+`content.ts`. Una copia pronta da allegare alle candidature sta in
+`public/Francesco_Da_Rin_Zanco_CV.pdf`: va rigenerata (scaricandola da `/cv` e sostituendo il file) ogni
+volta che cambiano i contenuti del CV.
 
 ## Deploy
 

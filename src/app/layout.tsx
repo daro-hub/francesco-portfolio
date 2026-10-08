@@ -48,12 +48,12 @@ export const metadata: Metadata = {
     description: content.summary,
     url: siteUrl,
     siteName: pageTitle,
-    images: [{ url: ogImagePath, width: 1200, height: 1200, alt: content.personal.fullName }],
+    images: [{ url: ogImagePath, width: 640, height: 640, alt: content.personal.fullName }],
     locale: "en_US",
     type: "profile",
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: pageTitle,
     description: content.summary,
     images: [ogImagePath],
@@ -73,7 +73,7 @@ export const viewport: Viewport = {
 
 // Person schema (JSON-LD): aiuta i motori di ricerca a collegare questo
 // sito all'identità reale di Francesco (rich result "Persona" invece di
-// una generica pagina web). filter(Boolean) scarta i contatti ancora TODO.
+// una generica pagina web).
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -81,9 +81,7 @@ const personJsonLd = {
   jobTitle: content.personal.tagline,
   url: siteUrl,
   image: `${siteUrl}${ogImagePath}`,
-  sameAs: [content.personal.contact.linkedin, content.personal.contact.github].filter(
-    (url) => url !== "TODO",
-  ),
+  sameAs: [content.personal.contact.linkedin, content.personal.contact.github],
 };
 
 // Applica il tema giusto prima dell'idratazione, per evitare un flash del

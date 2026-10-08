@@ -639,27 +639,6 @@ ol {
   transform: translateY(-1px);
 }
 
-/* Contatto non ancora compilato in content.ts: pill visibile ma non
-   cliccabile, coerente con come il resto del sito mostra i TODO invece
-   di nasconderli. */
-.contact-pill-todo {
-  cursor: default;
-  border-style: dashed;
-  color: var(--color-text-muted);
-}
-
-.contact-pill-todo:hover {
-  background: var(--color-surface);
-  border-color: var(--color-border);
-  color: var(--color-text-muted);
-  transform: none;
-}
-
-.contact-pill-todo .contact-pill-icon {
-  background: transparent;
-  color: var(--color-text-muted);
-}
-
 /* Feedback del tap prolungato: valore copiato negli appunti. */
 .contact-pill-copied {
   background: var(--color-accent-soft);

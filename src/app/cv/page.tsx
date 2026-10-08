@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { content } from "@/resources/content";
 import { dictionary } from "@/i18n";
+import { cvProjects, formatPeriod, shortRepoUrl } from "@/lib/cvFormat";
 import { CvDownloadButton } from "@/components/cv/CvDownloadButton";
 import "./cv.css";
 
@@ -35,6 +36,7 @@ export default function CvPage() {
           <p className="cv-contact">
             {[
               content.personal.contact.location,
+              content.personal.contact.phone,
               content.personal.contact.email,
               content.personal.contact.linkedin,
               content.personal.contact.github,
@@ -53,7 +55,7 @@ export default function CvPage() {
           <h2>Technical Skills</h2>
           {content.skills.map((group) => (
             <p key={group.area}>
-              <strong>{group.area}:</strong> {group.skills.length > 0 ? group.skills.join(", ") : "TODO"}
+              <strong>{group.area}:</strong> {group.skills.join(", ")}
             </p>
           ))}
         </section>
@@ -66,7 +68,7 @@ export default function CvPage() {
                 {exp.role} — {exp.company}
               </h3>
               <p className="cv-meta">
-                {exp.startDate} – {exp.endDate === "present" ? "Present" : exp.endDate}
+                {formatPeriod(exp.startDate, exp.endDate)}
                 {exp.location ? ` · ${exp.location}` : ""}
               </p>
               {exp.highlights.length > 0 && (
@@ -81,15 +83,33 @@ export default function CvPage() {
         </section>
 
         <section className="cv-section">
+          <h2>Projects</h2>
+          {cvProjects(content.projects).map((project) => (
+            <div key={project.slug} className="cv-entry">
+              <h3>
+                {project.title}
+                {project.status ? ` (${project.status})` : ""}
+              </h3>
+              <p className="cv-meta">{shortRepoUrl(project)}</p>
+              <p>{project.cvSummary}</p>
+            </div>
+          ))}
+        </section>
+
+        <section className="cv-section">
           <h2>Education</h2>
           {content.education.map((edu) => (
             <div key={`${edu.institution}-${edu.startDate}`} className="cv-entry">
               <h3>{edu.degree}</h3>
               <p className="cv-meta">
                 {edu.institution}
-                {edu.location ? ` · ${edu.location}` : ""} · {edu.startDate} –{" "}
-                {edu.endDate === "present" ? "Present" : edu.endDate}
+                {edu.location ? ` · ${edu.location}` : ""} · {formatPeriod(edu.startDate, edu.endDate)}
               </p>
+              {(edu.details ?? []).map((detail) => (
+                <p key={detail} className="cv-meta">
+                  {detail}
+                </p>
+              ))}
             </div>
           ))}
         </section>

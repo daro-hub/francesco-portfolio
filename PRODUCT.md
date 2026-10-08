@@ -22,13 +22,9 @@ candidatura/tirocinio.
 
 ## Positioning
 
-Non ancora deciso dall'utente: i contenuti che dimostrerebbero la
-differenziazione (skill per area, progetti in evidenza, numeri concreti,
-dettagli su esperienza in azienda vs percorso IoT/Big Data/ML) sono ancora
-`TODO` in `src/resources/content.ts` e verranno compilati in seguito. Il
-lavoro di design attuale procede su placeholder/contenuti reali parziali già
-presenti (nome, ruolo attuale in "amuseapp", percorso a "NeoCode Studio",
-laurea triennale a Udine in IoT/Big Data/ML, diploma ITI Girolamo Segato).
+Full-stack developer in produzione (amuseapp: console, webapp, app mobile, kiosk Android) con progetti AI
+costruiti in autonomia; Second Brain è il progetto di punta. Cerca un tirocinio Erasmus+ 2026-2027. Inglese B2.
+Scolastica è dichiarato MVP e Orbis un prototipo mai arrivato a MVP: niente claim oltre lo stato reale.
 
 ## Operating Context
 
@@ -50,15 +46,9 @@ laurea triennale a Udine in IoT/Big Data/ML, diploma ITI Girolamo Segato).
 
 ## Capabilities and Constraints
 
-- Molti campi contenuto sono ancora `TODO` (contatti, tagline definitiva,
-  intro/about, summary CV, stats, skill per area, progetti in evidenza,
-  dettagli ruoli/date esperienza ed education, lingue oltre l'italiano,
-  eventuale foto, volontariato). Non vanno inventati: il lavoro di design
-  procede sulla struttura e sui placeholder esistenti, i contenuti reali
-  verranno compilati dall'utente in un secondo momento.
-- Nessuna foto personale ancora disponibile/caricata.
-- Deploy è statico (`next build` → export in `out/`) su GitHub Pages: nessun
-  backend, nessuna route API.
+- Contenuti completi in `content.ts`; nessun campo `TODO` deve comparire sul sito. Non inventare numeri
+  (utenti, performance): se non verificati, non vanno aggiunti.
+- Deploy statico (`next build` → export in `out/`) su GitHub Pages: nessun backend, nessuna route API.
 
 ## Brand Commitments
 
@@ -67,14 +57,9 @@ Nessuno confermato. Nome: Francesco Da Rin Zanco. Tagline attuale
 
 ## Evidence on Hand
 
-- Esperienza lavorativa in corso presso "amuseapp" (ruolo/date TODO) e
-  precedente presso "NeoCode Studio" (ruolo/date TODO).
-- Percorso accademico: Laurea Triennale in Informatica
-  (IoT, Big Data & ML) — Università degli Studi di Udine
-  (in corso); diploma precedente presso ITI Girolamo Segato.
-- Nessun progetto, numero (utenti/performance/repo), testimonianza o
-  case study concreti ancora presenti: da non fabbricare, verranno aggiunti
-  dall'utente in `content.ts`.
+- Esperienza: amuseapp (dal 2025-02), NeoCode Studio (2024-07/2024-12), ecs project (estate 2023).
+- Laurea triennale in Informatica (IoT, Big Data & ML) a Udine, in corso; diploma ITI Girolamo Segato.
+- Progetti: Second Brain, Longevity, Scolastica (MVP), Orbis (prototipo).
 
 ## Product Principles
 

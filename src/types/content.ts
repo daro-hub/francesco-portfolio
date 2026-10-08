@@ -1,8 +1,6 @@
 import type { ProjectIconName } from "@/components/icons";
 
-// Schema dei contenuti del CV/portfolio.
-// I valori veri vengono compilati in src/resources/content.ts durante la fase di contenuto,
-// non durante questo scaffolding.
+// Schema dei contenuti del CV/portfolio; i valori stanno in src/resources/content.ts.
 
 export interface ContactInfo {
   email: string;
@@ -65,6 +63,7 @@ export interface Project {
   concept?: string; // il "perché"/l'idea di partenza, se distinta dal "come funziona"
   longDescription: string; // dettagliata (come funziona), per la pagina del progetto
   role?: string; // il tuo contributo specifico, se il progetto non è solo tuo
+  cvSummary?: string; // riassunto di 2-3 righe per il CV (/cv e PDF). Senza, il progetto non compare nel CV
   status?: string; // maturità dichiarata, es. "MVP" o "Prototype — never reached MVP": mostrata come badge su card e pagina
   compact?: boolean; // card più piccola (sotto la griglia), per i progetti secondari
   highlights?: ProjectHighlightGroup[]; // funzionalità raggruppate (integrazioni, automazioni, ...), nella pagina del progetto

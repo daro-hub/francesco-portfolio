@@ -1,12 +1,9 @@
 import type { CVContent } from "@/types/content";
 
-// TODO: this file still needs to be filled in with real data.
-// Fields marked "TODO" have not been provided/confirmed yet.
-
 export const content: CVContent = {
   personal: {
     fullName: "Francesco Da Rin Zanco",
-    tagline: "Full-Stack Developer", // TODO: confirm final tagline
+    tagline: "Full-Stack Developer",
     contact: {
       email: "darinzancof@gmail.com",
       phone: "+39 351 851 1209",
@@ -57,7 +54,7 @@ export const content: CVContent = {
     ],
   },
   summary:
-    "Full-stack developer building the platforms behind museum ticketing and visitor experiences at amuseapp — backoffice console, visitor webapp, mobile app, and the Android kiosk software that talks to payment hardware. Outside of work I design and ship AI-driven projects solo, end to end: Second Brain, a personal assistant that I use daily, which answers from my notes and live data across a dozen services, runs scheduled automations, and drives a coding agent with human approval; a RAG-based nutrition assistant; and an MVP that turns source PDFs into finished PowerPoint decks. Currently completing a Bachelor's in Computer Science (IoT, Big Data & ML) at the University of Udine, and looking for an Erasmus+ 2026-2027 internship to keep building real things.",
+    "Full-stack developer at amuseapp, building the platforms behind museum ticketing and visitor experiences: backoffice console, visitor webapp, mobile app and the Android kiosk software that talks to payment hardware. Outside work I build AI projects solo, end to end, such as Second Brain, a personal assistant I use daily that answers from my notes and live data and runs a coding agent with human approval. Bachelor's student in Computer Science (IoT, Big Data & ML) at the University of Udine, looking for an Erasmus+ 2026-2027 internship.",
   stats: [],
   skills: [
     { area: "Frontend", skills: ["Next.js", "React", "TypeScript", "Tailwind CSS"] },
@@ -133,6 +130,8 @@ export const content: CVContent = {
           ],
         },
       ],
+      cvSummary:
+        "Personal AI assistant on Telegram and web (text and voice). Routes each request to a RAG knowledge base or to live APIs (Calendar, Gmail, GitHub, Linear, Slack, Strava, Apple Health), runs scheduled automations, and drives a Claude Agent SDK coding agent that needs my approval before any push. Next.js, TypeScript, Supabase pgvector, OpenAI, MCP.",
       repos: [{ label: "Repository", url: "https://github.com/daro-hub/second-brain" }],
       tags: ["Next.js", "TypeScript", "Supabase pgvector", "OpenAI", "Claude Agent SDK", "RAG", "MCP", "Telegram bot", "Voice"],
       featured: true,
@@ -151,6 +150,8 @@ export const content: CVContent = {
         "Nutrition documents are uploaded to the backend, vectorized, and indexed in Pinecone; when a question comes in, the system retrieves the most relevant passages and asks GPT-4 to answer using only that context. The chat also runs a short intake — age, weight, height, activity level, goals — and uses that profile to personalize the guidance it gives. The one part of an in-person visit that can't be replicated is the physical exam; letting users optionally upload a file with fuller biometric data for an even more accurate result is the next planned refinement.\n\nThe FastAPI backend and the Next.js chat frontend are deployed separately on Render and Vercel.",
       role: "Designed and built the full stack solo: the retrieval pipeline, the grounding prompt strategy, and the chat frontend.",
       link: "https://longevity-alpha.vercel.app",
+      cvSummary:
+        "RAG nutrition assistant that answers only from indexed scientific documents and personalises its guidance from a short intake. FastAPI backend, Next.js chat frontend, Pinecone, GPT-4.",
       repos: [
         { label: "Frontend", url: "https://github.com/daro-hub/longevity" },
         { label: "Backend", url: "https://github.com/daro-hub/longevity-backend" },
@@ -171,6 +172,8 @@ export const content: CVContent = {
       longDescription:
         "An operator uploads a source PDF plus a PowerPoint master template. Claude proposes several layout variants per section, but nothing ships on trust: every plan is validated against the master's real placeholders — an invalid layout, a placeholder that doesn't exist, or an empty text fill triggers one automatic repair round-trip back to Claude instead of a silent fallback — and every text fill is scored against the source PDF for how much it actually overlaps with it, flagging anything that looks invented instead of shipping it quietly. The operator picks the best variant per section plus an image, and python-pptx assembles a final deck that matches the template exactly. What used to take most of a working day by hand comes down to about 30 minutes end to end. Scolastica is currently at MVP level.\n\nThe whole generation runs as a background job with an explicit, persisted state machine (queued → planning → grounding → rendering → building → completed), so a server restart mid-job doesn't silently lose it — a real problem the first request/response version had. The same pipeline extends to other content built from the same source material: auto-generated subtitles for audio/video, quizzes, and interactive maps.",
       role: "Built entirely solo — design, backend, frontend, and the whole content-generation pipeline.",
+      cvSummary:
+        "MVP that turns source PDFs into template-matching PowerPoint decks with Claude. Every plan is validated against the template and text not grounded in the source is flagged; cuts about a day of manual work to roughly 30 minutes. FastAPI, Next.js, SQLite.",
       repos: [{ label: "Repository", url: "https://github.com/daro-hub/Scolastica" }],
       tags: ["Next.js", "FastAPI", "Claude", "SQLite"],
       featured: true,
@@ -253,8 +256,8 @@ export const content: CVContent = {
   ],
   languages: [
     { language: "Italian", level: "Native" },
-    { language: "English", level: "Limited working proficiency" },
-    { language: "French", level: "Elementary proficiency" },
+    { language: "English", level: "B2 – Upper intermediate" },
+    { language: "French", level: "Elementary" },
   ],
   volunteer: [
     {

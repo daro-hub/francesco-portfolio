@@ -67,7 +67,6 @@ export function Hero() {
       copyValue: phoneDigits,
       icon: <PhoneIcon />,
       value: contact.phone,
-      todo: contact.phone === "TODO",
     },
     {
       key: "email",
@@ -75,7 +74,6 @@ export function Hero() {
       copyValue: contact.email,
       icon: <MailIcon />,
       value: contact.email,
-      todo: contact.email === "TODO",
     },
   ];
 
@@ -86,7 +84,6 @@ export function Hero() {
       copyValue: contact.linkedin,
       icon: <LinkedInIcon />,
       value: `${dictionary.hero.linkedin} · FDRZ`,
-      todo: contact.linkedin === "TODO",
     },
     {
       key: "github",
@@ -94,7 +91,6 @@ export function Hero() {
       copyValue: contact.github,
       icon: <GithubIcon />,
       value: `${dictionary.hero.github} · daro-hub`,
-      todo: contact.github === "TODO",
     },
   ];
 
@@ -113,7 +109,7 @@ export function Hero() {
 
           <p className="hero-tagline">{tagline}</p>
 
-          {contact.location !== "TODO" && (
+          {contact.location && (
             <a
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.location)}`}
               target="_blank"
@@ -129,15 +125,7 @@ export function Hero() {
               (telefono/email copiano il valore "pulito", LinkedIn/GitHub
               copiano l'URL del profilo) — un'unica grid, un unico hint. */}
           <div className="contact-pills">
-            {[...actionPills, ...linkPills].map((pill) =>
-              pill.todo ? (
-                <span key={pill.key} className="contact-pill contact-pill-todo" aria-disabled="true">
-                  <span className="contact-pill-icon" aria-hidden="true">
-                    {pill.icon}
-                  </span>
-                  <span className="contact-pill-label">TODO</span>
-                </span>
-              ) : (
+            {[...actionPills, ...linkPills].map((pill) => (
                 <ContactActionPill
                   key={pill.key}
                   href={pill.href}
@@ -147,8 +135,7 @@ export function Hero() {
                   copiedLabel={dictionary.hero.copied}
                   external={pill.key === "linkedin" || pill.key === "github"}
                 />
-              ),
-            )}
+            ))}
           </div>
           <p className="contact-pills-hint">{dictionary.hero.holdToCopyHint}</p>
 
