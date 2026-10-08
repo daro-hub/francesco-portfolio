@@ -36,6 +36,7 @@ export const en = {
     empty: "Featured projects coming soon.",
     backToProjects: "Back to projects",
     concept: "The idea",
+    highlights: "What it does",
     role: "My role",
     liveDemo: "Live demo",
     source: "Source",

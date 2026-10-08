@@ -28,7 +28,7 @@ dettagli su esperienza in azienda vs percorso IoT/Big Data/ML) sono ancora
 `TODO` in `src/resources/content.ts` e verranno compilati in seguito. Il
 lavoro di design attuale procede su placeholder/contenuti reali parziali già
 presenti (nome, ruolo attuale in "amuseapp", percorso a "NeoCode Studio",
-laurea magistrale a Udine in IoT/Big Data/ML, diploma ITI Girolamo Segato).
+laurea triennale a Udine in IoT/Big Data/ML, diploma ITI Girolamo Segato).
 
 ## Operating Context
 
@@ -69,8 +69,8 @@ Nessuno confermato. Nome: Francesco Da Rin Zanco. Tagline attuale
 
 - Esperienza lavorativa in corso presso "amuseapp" (ruolo/date TODO) e
   precedente presso "NeoCode Studio" (ruolo/date TODO).
-- Percorso accademico: Laurea Magistrale in Scienze e Tecnologie
-  Informatiche (IoT, Big Data & ML) — Università degli Studi di Udine
+- Percorso accademico: Laurea Triennale in Informatica
+  (IoT, Big Data & ML) — Università degli Studi di Udine
   (in corso); diploma precedente presso ITI Girolamo Segato.
 - Nessun progetto, numero (utenti/performance/repo), testimonianza o
   case study concreti ancora presenti: da non fabbricare, verranno aggiunti

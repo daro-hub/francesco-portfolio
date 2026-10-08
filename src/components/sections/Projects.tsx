@@ -9,7 +9,7 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       href={`/projects/${project.slug}/`}
-      className={`project-card glass-card${project.spotlight ? " project-card-spotlight" : ""}`}
+      className={`project-card glass-card${project.spotlight ? " project-card-spotlight" : ""}${project.compact ? " project-card-compact" : ""}`}
     >
       {project.spotlight && (
         <span className="project-spotlight-badge">{dictionary.projects.spotlight}</span>
@@ -18,6 +18,7 @@ function ProjectCard({ project }: { project: Project }) {
         {project.icon && <ProjectIcon name={project.icon.name} color={project.icon.color} />}
         <h3>{project.title}</h3>
       </div>
+      {project.status && <span className="project-status">{project.status}</span>}
       <p>{project.description}</p>
       <ul className="project-tags">
         {project.tags.map((tag) => (
@@ -38,7 +39,8 @@ export function Projects() {
   // a riga intera impedirebbe alle colonne vuote di collassare e le altre card
   // non riempirebbero più la riga.
   const spotlight = projects.filter((project) => project.spotlight);
-  const rest = projects.filter((project) => !project.spotlight);
+  const rest = projects.filter((project) => !project.spotlight && !project.compact);
+  const compact = projects.filter((project) => project.compact);
 
   return (
     <section id="projects" className="doc-section">
@@ -55,6 +57,13 @@ export function Projects() {
             {rest.length > 0 && (
               <div className="projects-grid">
                 {rest.map((project) => (
+                  <ProjectCard key={project.slug} project={project} />
+                ))}
+              </div>
+            )}
+            {compact.length > 0 && (
+              <div className="projects-grid projects-grid-compact">
+                {compact.map((project) => (
                   <ProjectCard key={project.slug} project={project} />
                 ))}
               </div>

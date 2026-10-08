@@ -57,7 +57,7 @@ export const content: CVContent = {
     ],
   },
   summary:
-    "Full-stack developer building the platforms behind museum ticketing and visitor experiences at amuseapp — backoffice console, visitor webapp, mobile app, and the Android kiosk software that talks to payment hardware. Outside of work I design and ship AI-driven side projects solo, end to end: a RAG-based nutrition assistant, an algorithmic trading platform with a rigorously-tested backtesting engine, and an AI pipeline that turns source PDFs into finished PowerPoint decks. Currently completing a Bachelor's in Computer Science (IoT, Big Data & ML) at the University of Udine, and looking for an Erasmus+ 2026-2027 internship to keep building real things.",
+    "Full-stack developer building the platforms behind museum ticketing and visitor experiences at amuseapp — backoffice console, visitor webapp, mobile app, and the Android kiosk software that talks to payment hardware. Outside of work I design and ship AI-driven projects solo, end to end: Second Brain, a personal assistant that I use daily, which answers from my notes and live data across a dozen services, runs scheduled automations, and drives a coding agent with human approval; a RAG-based nutrition assistant; and an MVP that turns source PDFs into finished PowerPoint decks. Currently completing a Bachelor's in Computer Science (IoT, Big Data & ML) at the University of Udine, and looking for an Erasmus+ 2026-2027 internship to keep building real things.",
   stats: [],
   skills: [
     { area: "Frontend", skills: ["Next.js", "React", "TypeScript", "Tailwind CSS"] },
@@ -75,14 +75,66 @@ export const content: CVContent = {
       title: "Second Brain — Aira, a Personal AI Assistant",
       icon: { name: "brain", color: "#ff6fae" },
       description:
-        "A personal AI assistant I talk to in plain language, by text or voice, on Telegram or the web. It answers from my own notes and from live data across my calendar, email, code, issues, and fitness tracking.",
+        "A personal AI assistant I talk to in plain language, by text or voice, on Telegram or the web. It answers from my own notes and from live data across calendar, email, code, issues, Slack, fitness and health, and it runs parts of my day on its own: morning and evening digests, reminders, check-ins, and an agent that investigates and fixes code, with my approval before anything is pushed.",
       concept:
-        "Everything I need to know about my own life and work is scattered across a dozen apps: calendar, email, GitHub, Linear, Strava, a password manager, my university notes. Second Brain is one assistant, Aira, that sits on top of all of them. I just ask, the way I would ask a human assistant, with no commands to remember. Every source is queried live instead of being copied into a database, so the answers are never stale.",
+        "Everything I need to know about my own life and work is scattered across a dozen apps: calendar, email, GitHub, Linear, Slack, Strava, Apple Health, a password manager, my university notes. Second Brain is one assistant, Aira, that sits on top of all of them. I just ask, the way I would ask a human assistant, with no commands to remember. Every source is queried live instead of being copied into a database, so the answers are never stale.",
       longDescription:
-        "Every message, typed or spoken, goes through a single shared pipeline. A classifier works out the intent, then routes the message to the right source: a RAG knowledge base on Supabase pgvector (with full-text search) for notes and university material, structured workout logs with automatic personal-record detection, or live API calls to Google Calendar, Gmail, GitHub, Linear, and Strava. Voice messages are transcribed, answered, and replied to with synthesized speech. Passwords are fetched locally through the Bitwarden CLI and never pass through the language model.\n\nThe same pipeline powers three front ends: a Telegram bot running as a Vercel webhook (so it works without my computer switched on), a full-screen web interface with hands-free voice mode that shows in real time which data sources each answer came from, and an MCP server that exposes every capability to Claude Code and Cursor. A password-protected Next.js dashboard brings the data together: a daily timeline that overlays heart rate, steps, meals, lessons, and workouts, plus a view that correlates different sources and refuses to show a correlation until enough data exists to back it.\n\nRouting quality is treated as something to test, not guess. A Vitest suite covers the core logic, and an eval set of real phrases that the bot once misrouted is replayed against the live model whenever the router changes. Next on the roadmap is an agentic worker: a job sent from Telegram runs a Claude Agent SDK session on my repositories, and any action with external effects waits for an approval tap.",
-      role: "Designed and built solo, end to end: the routing pipeline, every integration, the voice loop, the MCP server, the dashboard, and the test and eval tooling. It's the tool I use most every day.",
+        "Every message, typed or spoken, goes through a single shared pipeline. A few exact shortcuts handle the unambiguous cases in plain code with no model call. Everything else goes to an intent classifier that routes it to the right source: a RAG knowledge base on Supabase pgvector (with full-text search) for notes and university material, structured workout logs with automatic personal-record detection, or live API calls to Google Calendar, Gmail, GitHub, Linear, Slack, Strava and Apple Health. Voice messages are transcribed, answered, and replied to with synthesized speech, and photos are described by a vision model so a meal, a receipt or a gym machine can enter the same pipeline as text.\n\nThe same pipeline powers several front ends: a Telegram bot running as a Vercel webhook (so it works without my computer switched on), a full-screen web interface with a hands-free voice mode over the OpenAI Realtime API that shows in real time which data sources each answer came from, installable web push notifications, and an MCP server that exposes every capability to Claude Code and Cursor. A password-protected Next.js dashboard brings the data together: a daily timeline that overlays heart rate, steps, meals, lessons and workouts, a study planner, a training view, and a view that correlates different sources and refuses to show a correlation until enough data exists to back it.\n\nIt is also proactive. Scheduled jobs send a web-researched morning news digest and an evening briefing with tomorrow's agenda and workout, a daily \"knowledge pill\" with a monthly review, a mood diary check-in with one-tap buttons, and reminders. At midnight it summarises my day from the commits and calendar calls and logs my work hours, which I confirm with a one-word reply.\n\nThe latest layer is an agent. From Telegram I can hand a job to a worker running on my own machines: in read-only mode it investigates an issue or a codebase and reports back, and in write mode it works on an isolated git worktree, runs the typecheck and tests, and commits locally. It has no shell, it cannot touch lockfiles, CI or secrets, and nothing is pushed until I tap Approve in Telegram. The push itself is then done by deterministic code, not by the model.\n\nRouting quality is treated as something to test, not guess. A Vitest suite covers the core logic, and an eval set of real phrases that the bot once misrouted is replayed against the live model whenever the router changes.",
+      role: "Designed and built solo, end to end: the routing pipeline, every integration, the voice loop, the scheduled automations, the MCP server, the dashboard, the agent worker and the test and eval tooling. It's the tool I use most every day.",
+      highlights: [
+        {
+          title: "Live integrations",
+          items: [
+            { name: "Google Calendar", description: "Reads my agenda and can create and edit events from a sentence." },
+            { name: "Gmail", description: "Read-only search across my email, queried live." },
+            { name: "GitHub & Linear", description: "Repository info and issue status on demand, like \"how is the audio issue going?\"." },
+            { name: "Slack", description: "Read-only access. Message text is treated as data, never as instructions." },
+            { name: "Strava & Apple Health", description: "Activities, steps, heart rate and other health metrics, correlated with the rest of my day." },
+            { name: "Bitwarden", description: "Passwords fetched through the local CLI. They never pass through the language model and are never read aloud." },
+          ],
+        },
+        {
+          title: "Ways to talk to it",
+          items: [
+            { name: "Telegram", description: "Text, voice notes and photos. No commands needed for normal use." },
+            { name: "Web voice mode", description: "Hands-free voice-to-voice over WebRTC and the Realtime API, with sub-second replies, and I can interrupt it by speaking." },
+            { name: "MCP server", description: "Every capability exposed as a tool to Claude Code and Cursor." },
+            { name: "Push notifications", description: "Installable web push for reminders and digests." },
+          ],
+        },
+        {
+          title: "Automations",
+          items: [
+            { name: "Morning news", description: "A daily digest researched on the web, with the day's AI breakthrough." },
+            { name: "Evening briefing", description: "Tomorrow's agenda, the workout to do and open reminders, in one message." },
+            { name: "Reminders", description: "Scheduled in the database, checked every five minutes. Each job is booked once per day, so it never fires twice." },
+            { name: "Knowledge pills & mood diary", description: "A daily pill with a monthly review, and a nightly mood check-in answered with one tap." },
+            { name: "Work log", description: "At midnight it reads the day's commits and calendar calls, drafts the entry and asks for the hours. Replying \"2,5h\" completes it. It also tracks what is still to be invoiced." },
+            { name: "Study", description: "Lecture slides and handwritten notes uploaded as PDFs are converted by Claude into clean Markdown with LaTeX formulas, plus an exam planner." },
+          ],
+        },
+        {
+          title: "Coding agent",
+          items: [
+            { name: "Read-only jobs", description: "\"Look at this issue and tell me what you would do\" runs a Claude Agent SDK session on my repositories." },
+            { name: "Write jobs with approval", description: "Works in an isolated git worktree, runs typecheck and tests, commits locally. No push, install or free shell commands." },
+            { name: "Human in the loop", description: "Anything with external effects waits for an Approve tap on Telegram, then deterministic code performs it." },
+            { name: "Multi-machine", description: "Several workers can be online. Jobs are claimed atomically, with a preferred machine and a fallback." },
+          ],
+        },
+        {
+          title: "Reliability & safety",
+          items: [
+            { name: "Asks instead of guessing", description: "Low-confidence requests get a clarifying question, and anything it has no data for is reported as unsupported rather than forced into the closest category." },
+            { name: "Remembers the thread", description: "Keeps the active topic for 20 minutes so short follow-ups like \"and yesterday?\" work." },
+            { name: "No duplicate memories", description: "Near-identical notes are skipped, and similar ones are offered as a replacement with confirm buttons." },
+            { name: "Tested routing", description: "A Vitest suite across dozens of modules and a replayable eval set of real misrouted phrases." },
+            { name: "Locked down", description: "The dashboard and the voice and chat APIs sit behind a password and fail closed in production if it is missing." },
+          ],
+        },
+      ],
       repos: [{ label: "Repository", url: "https://github.com/daro-hub/second-brain" }],
-      tags: ["Next.js", "TypeScript", "Supabase pgvector", "OpenAI", "RAG", "MCP", "Telegram bot", "Voice"],
+      tags: ["Next.js", "TypeScript", "Supabase pgvector", "OpenAI", "Claude Agent SDK", "RAG", "MCP", "Telegram bot", "Voice"],
       featured: true,
       spotlight: true,
       order: 0,
@@ -108,36 +160,39 @@ export const content: CVContent = {
       order: 1,
     },
     {
-      slug: "orbis",
-      title: "Orbis — Algorithmic Trading Platform",
-      icon: { name: "candles", color: "#f5b73b" },
-      description:
-        "Automated trading and backtesting platform for Bitcoin, NASDAQ 100, and Gold, with live strategy execution.",
-      concept:
-        "The idea behind Orbis is a self-correcting strategy loop: a trading idea almost never works on the first try, so it has to be backtested to find where it fails, corrected, and tested again — repeatedly, until it becomes consistently profitable. Orbis is built toward eventually automating that whole loop with AI agents that write a strategy, backtest it, read the results, and revise it on their own, then keep monitoring and adjusting it over time as conditions change. The codebase is already shaped for that future: strategies plug into the backtester and the live bot through a small registry instead of being hardcoded, so an agent that writes a new strategy just has to register it — nothing else in the system needs to change.",
-      longDescription:
-        "Orbis is a full-stack trading platform: a FastAPI backend connects to Binance and Capital.com, runs an event-driven backtesting engine against historical data, and can execute strategies manually or through running bots in real time. The backtester is tested against the mistakes that make backtests lie: no look-ahead (a signal only fills at the next bar's open, never the current bar's own close), and the Sharpe ratio annualized for the data's real bar spacing instead of a hardcoded trading-day count. The Next.js frontend shows live candlestick charts for Bitcoin, NASDAQ 100, and Gold, lets you backtest a strategy before risking anything, place manual trades, and monitor open positions and account balance.\n\nToday the two included strategies (SMA crossover, RSI) are still written and tuned by hand — the self-correcting agent loop described above is the direction the project is being built toward.\n\nA further idea for later: AI models answer based on probability learned from past examples, and the same structure could apply to price data — training a model on an asset's historical movements to estimate the probability that a pattern repeats, and trading on that probabilistic prediction.",
-      role: "Built solo: the backend trading engine, broker integrations, and the dashboard/backtesting frontend.",
-      repos: [{ label: "Repository", url: "https://github.com/daro-hub/Orbis" }],
-      tags: ["Next.js", "FastAPI", "Trading strategies", "Backtesting"],
-      featured: true,
-      order: 2,
-    },
-    {
       slug: "scolastica",
       title: "Scolastica — AI Educational Content Generator",
       icon: { name: "slides", color: "#ff8a4c" },
+      status: "MVP",
       description:
         "Turns source PDFs into template-matching PowerPoint decks, quizzes, subtitles, and interactive maps — a manual, hours-long process cut down to about 30 minutes.",
       concept:
         "Turning a source PDF into a polished, template-matching PowerPoint deck used to be entirely manual: reading every page and rebuilding slides by hand could take most of a working day. Scolastica turns that into an automated pipeline that still keeps a human in control of the final choice for every section.",
       longDescription:
-        "An operator uploads a source PDF plus a PowerPoint master template. Claude proposes several layout variants per section, but nothing ships on trust: every plan is validated against the master's real placeholders — an invalid layout, a placeholder that doesn't exist, or an empty text fill triggers one automatic repair round-trip back to Claude instead of a silent fallback — and every text fill is scored against the source PDF for how much it actually overlaps with it, flagging anything that looks invented instead of shipping it quietly. The operator picks the best variant per section plus an image, and python-pptx assembles a final deck that matches the template exactly. What used to take most of a working day by hand comes down to about 30 minutes end to end.\n\nThe whole generation runs as a background job with an explicit, persisted state machine (queued → planning → grounding → rendering → building → completed), so a server restart mid-job doesn't silently lose it — a real problem the first request/response version had. The same pipeline extends to other content built from the same source material: auto-generated subtitles for audio/video, quizzes, and interactive maps.",
+        "An operator uploads a source PDF plus a PowerPoint master template. Claude proposes several layout variants per section, but nothing ships on trust: every plan is validated against the master's real placeholders — an invalid layout, a placeholder that doesn't exist, or an empty text fill triggers one automatic repair round-trip back to Claude instead of a silent fallback — and every text fill is scored against the source PDF for how much it actually overlaps with it, flagging anything that looks invented instead of shipping it quietly. The operator picks the best variant per section plus an image, and python-pptx assembles a final deck that matches the template exactly. What used to take most of a working day by hand comes down to about 30 minutes end to end. Scolastica is currently at MVP level.\n\nThe whole generation runs as a background job with an explicit, persisted state machine (queued → planning → grounding → rendering → building → completed), so a server restart mid-job doesn't silently lose it — a real problem the first request/response version had. The same pipeline extends to other content built from the same source material: auto-generated subtitles for audio/video, quizzes, and interactive maps.",
       role: "Built entirely solo — design, backend, frontend, and the whole content-generation pipeline.",
       repos: [{ label: "Repository", url: "https://github.com/daro-hub/Scolastica" }],
       tags: ["Next.js", "FastAPI", "Claude", "SQLite"],
       featured: true,
       order: 3,
+    },
+    {
+      slug: "orbis",
+      title: "Orbis — Algorithmic Trading Experiment",
+      icon: { name: "candles", color: "#f5b73b" },
+      status: "Prototype — never reached MVP",
+      compact: true,
+      description:
+        "An early experiment in backtesting trading strategies on Bitcoin, NASDAQ 100 and Gold. It was never taken to an MVP.",
+      concept:
+        "The idea behind Orbis is a self-correcting strategy loop: a trading idea almost never works on the first try, so it has to be backtested to find where it fails, corrected, and tested again. The long-term goal was to automate that loop with AI agents that write a strategy, backtest it, read the results and revise it.",
+      longDescription:
+        "Orbis never got past the prototype stage and I don't present it as a finished product. What exists is a FastAPI backend that connects to Binance and Capital.com and runs an event-driven backtesting engine, plus a Next.js frontend with live candlestick charts for Bitcoin, NASDAQ 100 and Gold. The backtester is tested against the mistakes that make backtests lie: no look-ahead (a signal only fills at the next bar's open, never the current bar's own close), and the Sharpe ratio annualized for the data's real bar spacing instead of a hardcoded trading-day count.\n\nThe two included strategies (SMA crossover, RSI) are written and tuned by hand, and strategies plug in through a small registry so that an agent could one day register a new one without touching the rest of the system. That agent loop was never built. What I took from the project is the backtesting discipline, not a trading product.",
+      role: "Built solo as an experiment: the backtesting engine, the broker integrations and the dashboard.",
+      repos: [{ label: "Repository", url: "https://github.com/daro-hub/Orbis" }],
+      tags: ["Next.js", "FastAPI", "Backtesting"],
+      featured: false,
+      order: 4,
     },
   ],
   experience: [

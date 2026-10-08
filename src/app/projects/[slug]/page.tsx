@@ -54,6 +54,8 @@ export default async function ProjectPage({
           <h1 className="project-title">{project.title}</h1>
         </div>
 
+        {project.status && <span className="project-status">{project.status}</span>}
+
         <ul className="project-tags project-page-tags">
           {project.tags.map((tag) => (
             <li key={tag}>{tag}</li>
@@ -72,6 +74,25 @@ export default async function ProjectPage({
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
+
+        {project.highlights && project.highlights.length > 0 && (
+          <div className="project-highlights">
+            <h2 className="project-highlights-title">{dictionary.projects.highlights}</h2>
+            {project.highlights.map((group) => (
+              <section key={group.title} className="project-highlight-group">
+                <h3>{group.title}</h3>
+                <ul>
+                  {group.items.map((item) => (
+                    <li key={item.name}>
+                      <strong>{item.name}</strong>
+                      <span>{item.description}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        )}
 
         {project.role && (
           <div className="project-role">

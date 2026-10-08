@@ -52,6 +52,11 @@ export interface ProjectRepo {
   url: string;
 }
 
+export interface ProjectHighlightGroup {
+  title: string; // es. "Integrations", "Automations"
+  items: { name: string; description: string }[];
+}
+
 export interface Project {
   slug: string; // usato nell'URL della pagina di dettaglio: /projects/<slug>/
   title: string;
@@ -60,6 +65,9 @@ export interface Project {
   concept?: string; // il "perché"/l'idea di partenza, se distinta dal "come funziona"
   longDescription: string; // dettagliata (come funziona), per la pagina del progetto
   role?: string; // il tuo contributo specifico, se il progetto non è solo tuo
+  status?: string; // maturità dichiarata, es. "MVP" o "Prototype — never reached MVP": mostrata come badge su card e pagina
+  compact?: boolean; // card più piccola (sotto la griglia), per i progetti secondari
+  highlights?: ProjectHighlightGroup[]; // funzionalità raggruppate (integrazioni, automazioni, ...), nella pagina del progetto
   link?: string; // demo live, se esiste
   repos: ProjectRepo[];
   tags: string[];
