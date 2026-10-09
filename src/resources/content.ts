@@ -59,7 +59,7 @@ export const content: CVContent = {
   skills: [
     { area: "Frontend", skills: ["Next.js", "React", "TypeScript", "Tailwind CSS"] },
     { area: "Mobile", skills: ["React Native", "Expo"] },
-    { area: "Backend", skills: ["Python", "FastAPI", "Xano", "Supabase", "PostgreSQL", "Stripe"] },
+    { area: "Backend", skills: ["Java", "Python", "FastAPI", "Xano", "Supabase", "PostgreSQL", "Stripe"] },
     { area: "Hardware & Native", skills: ["Kotlin", "Android", "Bluetooth LE (BLE)"] },
     {
       area: "AI/LLM",
