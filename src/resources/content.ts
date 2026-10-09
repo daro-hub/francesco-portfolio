@@ -3,7 +3,7 @@ import type { CVContent } from "@/types/content";
 export const content: CVContent = {
   personal: {
     fullName: "Francesco Da Rin Zanco",
-    tagline: "Full-Stack Developer",
+    tagline: "Full-Stack Developer · AI Applications",
     contact: {
       email: "darinzancof@gmail.com",
       phone: "+39 351 851 1209",
@@ -19,7 +19,7 @@ export const content: CVContent = {
     whatIDo:
       "Day to day I work across the backoffice console, the visitor-facing webapp, our mobile app, and the Android kiosk software that runs our museum ticket totems — talking directly to payment terminals and hardware. I've also been taking on more ownership of the system's health: monitoring, automations, and keeping things stable in production.",
     lookingFor:
-      "I'm looking for an Erasmus+ 2026-2027 internship, and I'm genuinely open — any hands-on computer science work interests me, as long as I get to build real things instead of just studying them.",
+      "I'm looking for an on-site Erasmus+ traineeship in 2026-2027, anywhere in Europe, in AI engineering, full-stack product work, or IoT and hardware-adjacent software. What I want is the same thing I already do at amuseapp: build real things, ship them, and learn from people who are better than me.",
   },
   amuseApp: {
     intro:
@@ -54,16 +54,16 @@ export const content: CVContent = {
     ],
   },
   summary:
-    "Full-stack developer at amuseapp, building the platforms behind museum ticketing and visitor experiences: backoffice console, visitor webapp, mobile app and the Android kiosk software that talks to payment hardware. Outside work I build AI projects solo, end to end, such as Second Brain, a personal assistant I use daily that answers from my notes and live data and runs a coding agent with human approval. Bachelor's student in Computer Science (IoT, Big Data & ML) at the University of Udine, looking for an Erasmus+ 2026-2027 internship.",
+    "Full-stack developer at amuseapp, building the platforms behind museum ticketing and visitor experiences: backoffice console, visitor webapp, mobile app and the Android kiosk software that talks to payment hardware. Outside work I build AI projects solo, end to end, such as Second Brain, a personal assistant I use daily that answers from my notes and live data and runs a coding agent with human approval, with a test suite and an eval set to keep its routing honest. Bachelor's student in Computer Science (IoT, Big Data & ML) at the University of Udine, looking for an Erasmus+ 2026-2027 internship.",
   stats: [],
   skills: [
     { area: "Frontend", skills: ["Next.js", "React", "TypeScript", "Tailwind CSS"] },
     { area: "Mobile", skills: ["React Native", "Expo"] },
-    { area: "Backend", skills: ["Xano", "Supabase", "PostgreSQL", "Stripe"] },
+    { area: "Backend", skills: ["Python", "FastAPI", "Xano", "Supabase", "PostgreSQL", "Stripe"] },
     { area: "Hardware & Native", skills: ["Kotlin", "Android", "Bluetooth LE (BLE)"] },
     {
       area: "AI/LLM",
-      skills: ["Claude Code", "Anthropic SDK", "OpenAI API", "AWS Bedrock", "MCP"],
+      skills: ["RAG (pgvector, Pinecone)", "Claude Agent SDK", "Anthropic SDK", "OpenAI API", "AWS Bedrock", "MCP", "Evals"],
     },
   ],
   projects: [
